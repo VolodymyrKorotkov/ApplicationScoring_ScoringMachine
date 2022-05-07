@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>[[#{company}]]</title>
+
+    <meta th:replace="fragments/translations :: translations"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!--    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">-->
+    <link th:href="@{/css/font-awesome/font-awesome.css}" rel="stylesheet">
+    <link th:href="@{/css/plugins/toastr/toastr.min.css}" rel="stylesheet">
+    <link th:href="@{/js/plugins/gritter/jquery.gritter.css}" rel="stylesheet">
+    <link th:href="@{/css/animate.css}" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <link th:href="@{/css/plugins/dataTables/datatables.min.css}" rel="stylesheet">
+    <link th:href="@{/css/plugins/chosen/bootstrap-chosen.css}" rel="stylesheet">
+    <link th:href="@{/css/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css}" rel="stylesheet">
+    <link th:href="@{/css/plugins/summernote/summernote.css}" rel="stylesheet">
+    <link th:href="@{/css/plugins/summernote/summernote-bs3.css}" rel="stylesheet">
+    <link th:href="@{/css/plugins/iCheck/custom.css}" rel="stylesheet">
+    <link th:href="@{/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css}" rel="stylesheet">
+    <link th:href="@{/css/plugins/datepicker/datepicker3.css}" rel="stylesheet">
+    <link th:href="@{/css/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.css}" rel="stylesheet">
+    <link th:href="@{/css/plugins/filestyle/jquery-filestyle.min.css}" rel="stylesheet">
+    <link th:href="@{/css/plugins/jasny/jasny-bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/plugins/switchery/switchery.css}" rel="stylesheet">
+    <link th:href="@{/css/plugins/footable.bootstrap.min.css}" rel="stylesheet">
+
+    <link th:href="@{/css/tables.css}" rel="stylesheet">
+    <link th:href="@{/css/custom-style.css}" rel="stylesheet">
+    <link th:href="@{/css/verification.css}" rel="stylesheet">
+
+    <script th:src="@{/js/jquery-3.1.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/collapse.js}"></script>
+    <script th:src="@{/js/transition.js}"></script>
+    <script th:src="@{/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+    <script th:src="@{/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+    <script th:src="@{/js/plugins/flot/jquery.flot.js}"></script>
+    <script th:src="@{/js/plugins/flot/jquery.flot.tooltip.min.js}"></script>
+    <script th:src="@{/js/plugins/flot/jquery.flot.spline.js}"></script>
+    <script th:src="@{/js/plugins/flot/jquery.flot.resize.js}"></script>
+    <script th:src="@{/js/plugins/flot/jquery.flot.pie.js}"></script>
+    <script th:src="@{/js/plugins/peity/jquery.peity.min.js}"></script>
+<!--    <script th:src="@{/js/demo/peity-demo.js}"></script>-->
+    <script th:src="@{/js/inspinia.js}"></script>
+    <script th:src="@{/js/plugins/pace/pace.min.js}"></script>
+    <!--<script th:src="@{/js/plugins/jquery-ui/jquery-ui.min.js}"></script>-->
+    <script th:src="@{/js/plugins/gritter/jquery.gritter.min.js}"></script>
+    <script th:src="@{/js/plugins/sparkline/jquery.sparkline.min.js}"></script>
+    <script th:src="@{/js/plugins/chartJs/Chart.min.js}"></script>
+    <script th:src="@{/js/plugins/toastr/toastr.min.js}"></script>
+    <script th:src="@{/js/plugins/iCheck/icheck.min.js}"></script>
+    <script th:src="@{/js/plugins/chosen/chosen.jquery.js}"></script>
+    <script th:src="@{/js/plugins/chosen/chosen-readonly.min.js}"></script>
+    <script th:src="@{/js/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js}"></script>
+    <script th:src="@{/js/plugins/datepicker/bootstrap-datepicker.js}"></script>
+    <script th:src="@{/js/plugins/moment/moment-with-locales-2.24.min.js}"></script>
+    <script th:src="@{/js/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js}"></script>
+    <script th:src="@{/js/plugins/filestyle/jquery-filestyle.min.js}"></script>
+    <script th:src="@{/js/plugins/switchery/switchery.js}"></script>
+    <script th:src="@{/js/plugins/blueimp-file-upload/jquery.ui.widget.js}"></script>
+    <script th:src="@{/js/plugins/blueimp-file-upload/jquery.iframe-transport.min.js}"></script>
+    <script th:src="@{/js/plugins/blueimp-file-upload/jquery.fileupload.min.js}"></script>
+    <script th:src="@{/js/plugins/blueimp-file-upload/jquery.fileupload-process.min.js}"></script>
+
+    <!--<script th:src="@{/js/plugins/jasny/jasny-bootstrap.min.js}"></script>-->
+    <script th:src="@{/js/jquery.mask.min.js}"></script>
+    <script th:src="@{/js/plugins/validate/jquery.validate.min.js}"></script>
+    <script th:src="@{/js/jquery.inputmask.bundle.min.js}"></script>
+    <script th:src="@{/js/mask-classes.js}"></script>
+    <script th:src="@{/js/validation-mesages.js}"></script>
+    <script th:src="@{/js/plugins/summernote/summernote.min.js}"></script>
+    <script th:src="@{/js/plugins/summernote/lang/summernote-vi.js}"></script>
+    <script th:src="@{/js/plugins/chartJs/Chart.min.js}"></script>
+    <script th:src="@{/js/tables.js}"></script>
+    <script th:src="@{/js/forms.js}"></script>
+<!--    <script th:src="@{/js/charts.js}"></script>-->
+    <script th:src="@{/js/js.cookie.js}"></script>
+<!--    <script th:src="@{/js/bpmn-viewer.production.min.js}"></script>-->
+    <script th:src="@{/js/bpmn-navigated-viewer.min.js}"></script>
+    <script th:src="@{/js/footable.min.js}"></script>
+
+</head>
+
+<body>
+<div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation"
+         th:include="fragments/navbar :: sidemenu(${page}, ${subpage})">
+        Navigation bar goes here...
+    </nav>
+
+    <div id="page-wrapper" class="white-bg dashbard-1">
+        <div class="row border-bottom" th:include="fragments/navbar :: topmenu"></div>
+
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-7" layout:fragment="header"></div>
+            <div class="col-lg-5">
+                <div class="title-action" layout:fragment="actions">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section row wrapper wrapper-content border-bottom white-bg table-filter-container"
+             th:hidden="${(viewState == null or not viewState.filtersPanelShown) and (param.sf == null or param.sf[0] ne 'true')}">
+
+            <form method="get" class="table-filter-form">
+                <div layout:fragment="filters">
+
+                </div>
+                <div class="col-lg-12">
+                    <button type="submit" class="btn btn-white btn-sm">Apply Filters</button>
+                    <a class="btn btn-white btn-sm btn-clear-filter">Reset Filters</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="content-section row wrapper wrapper-content">
+            <div class="clearfix" style="padding-left: 8px; padding-right: 8px;" layout:fragment="content">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="footer fixed">
+                <div class="pull-right">
+                    System Version: <strong th:text="${@environmentInfo.getAppVersion()}">1.0</strong>
+                </div>
+                <div>
+                    [[#{company}]] &copy; 2020
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block layout:fragment="dialogs">
+    <!--Add modal dialogs here-->
+</th:block>
+
+<th:block layout:fragment="script">
+    <!--custom scripts goes here-->
+</th:block>
+
+</body>
+</html>

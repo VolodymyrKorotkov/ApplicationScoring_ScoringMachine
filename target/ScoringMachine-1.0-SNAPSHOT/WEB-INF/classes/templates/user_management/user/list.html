@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      th:with="page='user_management', subpage='user'">
+
+<body>
+
+<div layout:fragment="header">
+    <h2>Users</h2>
+    <ol class="breadcrumb hidden-xs">
+        <li>[[#{company}]]</li>
+        <li>User Management</li>
+        <li class="active"><strong>Users</strong></li>
+    </ol>
+</div>
+
+<div layout:fragment="actions">
+    <a th:href="@{/user_management/user/new}" class="btn btn-primary hidden-xs" sec:authorize="hasAuthority('BACKOFFICE_USER_MANAGE')">Create</a>
+    <button class="btn btn-primary table-filter-button">Search</button>
+</div>
+
+<div layout:fragment="filters">
+    <div class="col-md-4 col-xs-12">
+        <div th:replace="fragments/tables :: filter-text ('Login', 'login', '')"></div>
+        <div th:replace="fragments/tables :: filter-text ('Last Name', 'lastName', '')"></div>
+    </div>
+    <div class="col-md-4 col-xs-12">
+        <div th:replace="fragments/tables :: filter-multi-select (${roleMap}, 'Role', 'roles', '')"></div>
+        <div th:replace="fragments/tables :: filter-multi-select (${statuses}, 'Status', 'statuses', '')"></div>
+    </div>
+</div>
+
+<div layout:fragment="content">
+    <table class="table table-bordered table-hover table-pageable table-sortable">
+        <thead>
+        <tr>
+            <th class="center" data-sortField="id">#</th>
+            <th class="center" data-sortField="lastName">Full Name</th>
+            <th class="center" data-sortField="login">Login</th>
+            <th class="center" data-sortField="login">Phone</th>
+            <th class="center" data-sortField="role.name">Role</th>
+            <th class="center" data-sortField="status">Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user: ${backofficeUserAccountPage.content}" class="clickable" th:formtarget="${user.id}">
+            <td class="center">[[${user.id}]]</td>
+            <td class="center">[[${user.fullName}]]</td>
+            <td class="center">[[${user.login}]]</td>
+            <td class="center">
+                <a th:href="@{|tel:+${user.phone}|}" class="non-clickable">[[${#phone.format(user.phone)}]]</a>
+            </td>
+            <td class="center">
+                <a th:href="@{|/user_management/role/${user.role.id}/edit|}">[[${user.role.name}]]</a>
+            </td>
+            <td>
+                <span class="label table-cell-status" th:text="${#localization.name('borrowerAccount.status', user.status)}"
+                      th:styleappend="|background-color: ${#enums.color('borrowerAccount.status', user.status)} !important;|"></span>
+            </td>
+        </tr>
+        </tbody>
+        <tfoot th:replace="fragments/tables :: tableFooter(${backofficeUserAccountPage})"></tfoot>
+    </table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      th:with="page='user_management', subpage='user'">
+
+<body>
+
+<div layout:fragment="header">
+    <h2>Users</h2>
+    <ol class="breadcrumb hidden-xs">
+        <li>[[#{company}]]</li>
+        <li>User Management</li>
+        <li><a th:href="@{/templates/user_management/user}">Users</a></li>
+        <li class="active"><strong>[[${backofficeUserAccount.id}]]</strong></li>
+    </ol>
+</div>
+
+<div layout:fragment="actions">
+    <button class="btn btn-primary btn-back" th:href="@{/templates/user_management/user}">Back</button>
+    <div class="btn-group" sec:authorize="hasAuthority('BACKOFFICE_USER_MANAGE')">
+        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" aria-expanded="false">
+            Actions <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right">
+            <li>
+                <a th:href="@{${backofficeUserAccount.id} + '/edit'}">Edit</a>
+            </li>
+            <li>
+                <a data-toggle="modal" data-target="#editPasswordDialog">Change Password</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a th:if="${backofficeUserAccount.status.name() eq 'ACTIVE'}" data-toggle="modal" data-target="#deactivateUserAccount">Deactivate</a>
+                <a th:if="${backofficeUserAccount.status.name() eq 'INACTIVE'}" data-toggle="modal" data-target="#activateUserAccount">Activate</a>
+                <a th:if="${#collections.equals(backofficeUserAccount.status, 'LOCKED')}" data-toggle="modal" data-target="#unlockUserAccount">Unlock</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div layout:fragment="content">
+    <th:block th:if="${activateResult}!=null and ${activateResult}">
+        <div th:replace="fragments/control :: successAlert(#{message.user.accountActivated})"></div>
+    </th:block>
+    <th:block th:if="${deactivateResult}!=null and ${deactivateResult}">
+        <div th:replace="fragments/control :: successAlert(#{message.user.accountDeactivated})"></div>
+    </th:block>
+    <th:block th:if="${unlockResult}!=null and ${unlockResult}">
+        <div th:replace="fragments/control :: successAlert(#{message.user.accountUnlocked})"></div>
+    </th:block>
+    <th:block th:if="${changePasswordResult}">
+        <div th:replace="security/change-user-password :: result(${changePasswordResult})"></div>
+    </th:block>
+
+    <div th:replace="fragments/control :: h3_hr('Details', '100%', '1', '#85adad')"></div>
+
+    <div class="col-lg-12">
+        <div class="col-sm-4 col-view">
+            <div th:replace="fragments/control :: viewdata('Login', ${backofficeUserAccount.login})"></div>
+            <div class="row" style="margin-bottom: 10px;">
+                <div class="col-lg-12 view-data-title">Status:</div>
+                <div class="col-lg-12 view-data-key">
+                <span class="label"
+                      th:classappend="${backofficeUserAccount.status.name() eq 'ACTIVE' ? 'label-primary' : 'label-danger'}"
+                      th:text="${#localization.name(backofficeUserAccount.status)}">
+                [[${#localization.name(backofficeUserAccount.status)}]]</span>
+                </div>
+            </div>
+            <div th:replace="fragments/control :: viewdata('First name', ${backofficeUserAccount.firstName})"></div>
+            <div th:replace="fragments/control :: viewdata('Middle name', ${backofficeUserAccount.middleName})"></div>
+            <div th:replace="fragments/control :: viewdata('Last Name', ${backofficeUserAccount.lastName})"></div>
+        </div>
+        <div class="col-sm-4 col-view">
+            <div class="row" style="margin-bottom: 10px;">
+                <div class="col-lg-12 view-data-title">Role</div>
+                <div class="col-lg-12 view-data-key">
+                    <a th:href="@{|/user_management/role/${backofficeUserAccount.role.id}/edit|}">[[${backofficeUserAccount.role.name}]]</a>
+                </div>
+            </div>
+            <div th:replace="fragments/control :: viewYesNoData('Super Admin', ${backofficeUserAccount.superUser})"></div>
+
+        </div>
+        <div class="col-sm-4 col-view">
+            <div th:replace="fragments/control :: viewDateData('Locked Until', ${backofficeUserAccount.lockedUntil} , 'dd.MM.yyyy')"></div>
+            <div th:replace="fragments/control :: viewYesNoData('Password Change Required', ${backofficeUserAccount.passwordChangeRequired})"></div>
+            <div class="row" style="margin-bottom: 10px;">
+                <div class="col-lg-12 view-data-title">Phone</div>
+                <div class="col-lg-12 view-data-key">
+                    <a th:if="${backofficeUserAccount.phone != null}" th:href="@{|tel:+${backofficeUserAccount.phone}|}">[[${#phone.format(backofficeUserAccount.phone)}]]</a>
+                    <span th:if="${backofficeUserAccount.phone == null}">-</span>
+                </div>
+            </div>
+            <div th:replace="fragments/control :: viewPhoneData('Email', ${backofficeUserAccount.email})"></div>
+        </div>
+    </div>
+</div>
+
+<div layout:fragment="dialogs">
+    <div class="col-lg-12"
+         th:if="${backofficeUserAccount.status.name() eq 'ACTIVE'}"
+         sec:authorize="hasAuthority('BACKOFFICE_USER_MANAGE')"
+         th:replace="fragments/modal :: okCancel('Confirm Action',
+        #{message.user.confirmDeactivation},
+        @{'/user_management/user/' +  ${backofficeUserAccount.id}+ '/deactivate'}, 'post',
+        'deactivateUserAccount')">
+    </div>
+
+    <div class="col-lg-12"
+         th:if="${backofficeUserAccount.status.name() eq 'INACTIVE'}"
+         sec:authorize="hasAuthority('BACKOFFICE_USER_MANAGE')"
+         th:replace="fragments/modal :: okCancel('Confirm Action',
+        #{message.user.confirmActivation},
+        @{'/user_management/user/' +  ${backofficeUserAccount.id}+ '/activate'}, 'post',
+        'activateUserAccount')">
+    </div>
+
+    <div class="col-lg-12"
+         th:if="${#collections.equals(backofficeUserAccount.status, 'LOCKED')}"
+         sec:authorize="hasAuthority('BACKOFFICE_USER_MANAGE')"
+         th:replace="fragments/modal :: okCancel('Confirm Action',
+        #{user.view.confirmAction.question.unlock},
+        @{'/user_management/user/' +  ${backofficeUserAccount.id}+ '/unlock'}, 'post',
+        'unlockUserAccount')">
+    </div>
+
+    <div
+        th:replace="security/change-user-password :: dialog(@{'/user_management/user/'+${backofficeUserAccount.id}+'/changePassword'})"></div>
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+{
+  "groups": [
+    {
+      "name": "korotkov.back",
+      "type": "com.korotkov.backoffice.configuration.BackOfficeConfigurationProperties",
+      "sourceType": "com.korotkov.backoffice.configuration.BackOfficeConfigurationProperties"
+    },
+    {
+      "name": "korotkov.back.application-management",
+      "type": "com.korotkov.backoffice.configuration.BackOfficeConfigurationProperties$ApplicationManagement",
+      "sourceType": "com.korotkov.backoffice.configuration.BackOfficeConfigurationProperties",
+      "sourceMethod": "getApplicationManagement()"
+    },
+    {
+      "name": "korotkov.back.bpm",
+      "type": "com.korotkov.backoffice.configuration.BackOfficeConfigurationProperties$Bpm",
+      "sourceType": "com.korotkov.backoffice.configuration.BackOfficeConfigurationProperties",
+      "sourceMethod": "getBpm()"
+    },
+    {
+      "name": "korotkov.back.credit-calculation",
+      "type": "com.korotkov.backoffice.configuration.BackOfficeConfigurationProperties$CreditCalculation",
+      "sourceType": "com.korotkov.backoffice.configuration.BackOfficeConfigurationProperties",
+      "sourceMethod": "getCreditCalculation()"
+    },
+    {
+      "name": "korotkov.back.notifications",
+      "type": "com.korotkov.backoffice.configuration.BackOfficeConfigurationProperties$Notifications",
+      "sourceType": "com.korotkov.backoffice.configuration.BackOfficeConfigurationProperties",
+      "sourceMethod": "getNotifications()"
+    },
+    {
+      "name": "korotkov.back.scoring",
+      "type": "com.korotkov.backoffice.configuration.BackOfficeConfigurationProperties$Scoring",
+      "sourceType": "com.korotkov.backoffice.configuration.BackOfficeConfigurationProperties",
+      "sourceMethod": "getScoring()"
+    },
+    {
+      "name": "korotkov.back.security",
+      "type": "com.korotkov.backoffice.configuration.BackOfficeConfigurationProperties$Security",
+      "sourceType": "com.korotkov.backoffice.configuration.BackOfficeConfigurationProperties",
+      "sourceMethod": "getSecurity()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "korotkov.back.application-management.cancel-expired-cron",
+      "type": "java.lang.String",
+      "sourceType": "com.korotkov.backoffice.configuration.BackOfficeConfigurationProperties$ApplicationManagement"
+    },
+    {
+      "name": "korotkov.back.application-management.max-idle-hours-before-cancel",
+      "type": "java.lang.Integer",
+      "sourceType": "com.korotkov.backoffice.configuration.BackOfficeConfigurationProperties$ApplicationManagement"
+    },
+    {
+      "name": "korotkov.back.bpm.retry-policy",
+      "type": "java.lang.String",
+      "sourceType": "com.korotkov.backoffice.configuration.BackOfficeConfigurationProperties$Bpm"
+    },
+    {
+      "name": "korotkov.back.credit-calculation.calculate-not-finished-cron",
+      "type": "java.lang.String",
+      "sourceType": "com.korotkov.backoffice.configuration.BackOfficeConfigurationProperties$CreditCalculation"
+    },
+    {
+      "name": "korotkov.back.main-executor-pool-size",
+      "type": "java.lang.Integer",
+      "sourceType": "com.korotkov.backoffice.configuration.BackOfficeConfigurationProperties"
+    },
+    {
+      "name": "korotkov.back.notifications.check-cron",
+      "type": "java.lang.String",
+      "sourceType": "com.korotkov.backoffice.configuration.BackOfficeConfigurationProperties$Notifications"
+    },
+    {
+      "name": "korotkov.back.scoring.check-cron",
+      "type": "java.lang.String",
+      "sourceType": "com.korotkov.backoffice.configuration.BackOfficeConfigurationProperties$Scoring"
+    },
+    {
+      "name": "korotkov.back.security.account-block-minutes",
+      "type": "java.lang.Integer",
+      "sourceType": "com.korotkov.backoffice.configuration.BackOfficeConfigurationProperties$Security"
+    },
+    {
+      "name": "korotkov.back.security.login-attempts-before-block",
+      "type": "java.lang.Integer",
+      "sourceType": "com.korotkov.backoffice.configuration.BackOfficeConfigurationProperties$Security"
+    },
+    {
+      "name": "korotkov.back.security.password-regex",
+      "type": "java.lang.String",
+      "sourceType": "com.korotkov.backoffice.configuration.BackOfficeConfigurationProperties$Security"
+    },
+    {
+      "name": "korotkov.back.security.password-reuse-threshold",
+      "type": "java.lang.Integer",
+      "sourceType": "com.korotkov.backoffice.configuration.BackOfficeConfigurationProperties$Security"
+    },
+    {
+      "name": "korotkov.back.security.password-validity-days",
+      "type": "java.lang.Integer",
+      "sourceType": "com.korotkov.backoffice.configuration.BackOfficeConfigurationProperties$Security"
+    },
+    {
+      "name": "korotkov.back.task-scheduler-pool-size",
+      "type": "java.lang.Integer",
+      "sourceType": "com.korotkov.backoffice.configuration.BackOfficeConfigurationProperties"
+    }
+  ],
+  "hints": []
+}

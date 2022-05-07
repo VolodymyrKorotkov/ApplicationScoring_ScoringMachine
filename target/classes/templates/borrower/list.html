@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      layout:decorate="~{fragments/layout}"
+      th:with="page='borrowerAccount'">
+
+<body>
+
+<div layout:fragment="header">
+    <h2>Borrowers</h2>
+    <ol class="breadcrumb hidden-xs">
+        <li>[[#{company}]]</li>
+        <li><strong>Borrowers</strong></li>
+    </ol>
+</div>
+
+<div layout:fragment="actions">
+    <button class="btn btn-primary table-filter-button">Search</button>
+</div>
+
+<div layout:fragment="filters">
+    <div class="col-md-4 col-xs-12">
+        <div th:replace="fragments/tables :: filter-text ('Mobile Number', 'mobilePhone', 'phone-mask')"></div>
+    </div>
+    <div class="col-md-4 col-xs-12">
+        <div th:replace="fragments/tables :: filter-text ('Email', 'email', 'email-mask')"></div>
+    </div>
+    <div class="col-md-4 col-xs-12">
+        <div th:replace="fragments/tables :: filter-text ('Last Name', 'lastName', '')"></div>
+    </div>
+    <div class="col-md-4 col-xs-12">
+        <div th:replace="fragments/tables :: filter-text ('SSS Number', 'sssNumber', 'sss-number-mask')"></div>
+    </div>
+</div>
+
+<div layout:fragment="content">
+    <table class="table table-bordered table-hover table-pageable table-sortable">
+        <thead>
+        <tr>
+            <th style="width: 60px;">#</th>
+            <th class="center" data-sortField="personalData.firstName">First Name</th>
+            <th class="center" data-sortField="personalData.middleName">Middle Name</th>
+            <th class="center" data-sortField="personalData.lastName">Last Name</th>
+            <th class="center" data-sortField="personalData.sssNumber">SSS Number</th>
+            <th class="center" data-sortField="contactDetails.phoneNumber">Mobile Number</th>
+            <th class="center" data-sortField="contactDetails.phoneNumber">Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="borrowerAccount: ${borrowerPage.content}" class="clickable" th:href="@{|/borrowerAccount/${borrowerAccount.id}|}">
+            <td class="center">[[${borrowerStat.index} + 1]]</td>
+            <td class="center">
+                [[${borrowerAccount?.personalData?.firstName}]]
+            </td>
+            <td class="center">
+                [[${borrowerAccount?.personalData?.middleName}]]
+            </td>
+            <td class="center">
+                [[${borrowerAccount?.personalData?.lastName}]]
+            </td>
+            <td class="center">[[${borrowerAccount.personalData?.sssNumber}]]</td>
+            <td class="center">[[${borrowerAccount.contactDetails?.phoneNumber}]]</td>
+            <td class="center">[[${borrowerAccount.contactDetails?.email}]]</td>
+        </tr>
+        </tbody>
+        <tfoot th:replace="fragments/tables :: tableFooter(${borrowerPage})"></tfoot>
+    </table>
+</div>
+
+</body>
+</html>

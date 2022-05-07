@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<div th:fragment="tab_content">
+    <h3>Loans History</h3>
+
+    <div th:replace="fragments/control :: hr('100%', '1', '#85adad')"></div>
+
+    <th:block th:if="${loans.size() == 0}">
+        <div th:replace="fragments/control :: successAlert('No data to display')"></div>
+    </th:block>
+
+    <table th:if="${loans.size() > 0}" class="table table-bordered table-hover table-pageable table-sortable">
+        <thead>
+        <tr>
+            <th style="width: 60px;">#</th>
+            <th>Loan Number</th>
+            <th>Funding Data</th>
+            <th>Loan Type</th>
+            <th>Amount, PHP</th>
+            <th>Interest Rate (per day), %</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="loan : ${loans}" class="clickable" th:href="@{'/credit/' + ${loan.id}}">
+            <td>[[${loanStat.index} + 1]]</td>
+            <td>[[${loan.contractNumber}]]</td>
+            <td>[[${#temporals.format(loan.issuedAt, 'dd/MM/yyyy')}]]</td>
+            <td>[[${loan.creditProduct.code}]]</td>
+            <td>[[${#numbers.formatDecimal(loan.amount,1,'WHITESPACE',2,'DEFAULT')}]]</td>
+            <td>[[${loan.creditApplication.interestRate.doubleValue() * 100}]]</td>
+            <td>[[${loan.status}]]</td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>

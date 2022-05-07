@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      th:with="page='borrowerAccount'">
+
+<body>
+
+<div layout:fragment="header">
+    <h2>Borrowers</h2>
+    <ol class="breadcrumb hidden-xs">
+        <li>[[#{company}]]</li>
+        <li><a th:href="@{/borrowerAccount}">Borrowers</a></li>
+        <li><strong>[[${borrowerAccount.id}]]</strong></li>
+    </ol>
+</div>
+
+<div layout:fragment="content">
+
+    <div class="tabs-container">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#details">Details</a></li>
+            <li><a data-toggle="tab" href="#applications" id="applications_btn">Applications</a></li>
+            <li><a data-toggle="tab" href="#loans" id="loans_btn">Loans History</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="details" class="tab-pane active">
+                <div class="panel-body">
+                    <div th:replace="borrowerAccount/tabs/details :: tab_content(${borrowerAccount})"></div>
+                </div>
+            </div>
+            <div id="applications" class="tab-pane">
+                <div class="panel-body">
+                    <div th:replace="borrowerAccount/tabs/applications :: tab_content"></div>
+                </div>
+            </div>
+            <div id="loans" class="tab-pane">
+                <div class="panel-body">
+                    <div th:replace="borrowerAccount/tabs/loans :: tab_content"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix" style="padding-top: 40px"></div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<body>
+
+<nav th:fragment="sidemenu(page, subpage)">
+    <div class="sidebar-collapse">
+        <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                            <span class="clear">
+                                <span class="block m-t-xs"> <strong class="font-bold">Hello,</strong></span>
+                                <span class="text-muted text-xs block">[[${#authentication.principal.account.fullName}]]</span>
+                            </span>
+                </div>
+                <div class="logo-element">
+                    HES FinTech
+                </div>
+            </li>
+
+
+            <li th:classappend="(${page} eq 'borrowerAccount') ? 'active' : ''" sec:authorize="hasAuthority('BORROWER_VIEW')">
+                <a th:href="@{/borrowerAccount}"><i class="fa fa-group"></i> <span
+                    class="nav-label">Borrowers</span></a>
+            </li>
+
+            <li th:classappend="(${page} eq 'user_management') ? 'active' : ''" sec:authorize="hasAnyAuthority('BACK_USER_ROLE_VIEW', 'BACKOFFICE_USER_VIEW')">
+                <a>
+                    <i class="fa fa-users"></i>
+                    <span class="nav-label">User Management</span>
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level collapse">
+                    <li th:classappend="(${subpage} eq 'user') ? 'active' : ''" sec:authorize="hasAuthority('BACKOFFICE_USER_VIEW')">
+                        <a th:href="@{/templates/user_management/user}">Users</a>
+                    </li>
+                    <li th:classappend="(${subpage} eq 'role') ? 'active' : ''" sec:authorize="hasAuthority('BACK_USER_ROLE_VIEW')">
+                        <a th:href="@{/templates/user_management/role}">Roles</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<div th:fragment="topmenu">
+    <nav class="navbar navbar-static-top gray-bg-forced" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+        </div>
+        <ul class="nav navbar-top-links navbar-right">
+
+            <li class="hidden-sm hidden-md hidden-lg pull-right">
+                <a th:href="@{/security/logout}">
+                    <i class="fa fa-sign-out"></i>Logout
+                </a>
+            </li>
+
+            <li class="hidden-xs">
+                <a th:href="@{/security/logout}">
+                    <i class="fa fa-sign-out"></i>Logout
+                </a>
+            </li>
+        </ul>
+
+    </nav>
+</div>
+
+
+</body>
+</html>

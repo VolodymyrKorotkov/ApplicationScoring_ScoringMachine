@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      th:with="page='user_management', subpage='role'">
+
+<body>
+
+<div layout:fragment="header">
+    <h2>Roles</h2>
+    <ol class="breadcrumb hidden-xs">
+        <li>[[#{company}]]</li>
+        <li>User Management</li>
+        <li class="active"><strong>Roles</strong></li>
+    </ol>
+</div>
+
+<div layout:fragment="actions" sec:authorize="hasAuthority('BACK_USER_ROLE_MANAGE')">
+    <a th:href="@{/user_management/role/new}" class="btn btn-primary hidden-xs">Create</a>
+</div>
+
+<div layout:fragment="content">
+    <table class="table table-bordered table-hover table-pageable table-sortable">
+        <thead>
+        <tr>
+            <th class="center" data-sortField="id">#</th>
+            <th class="center" data-sortField="name">Name</th>
+            <th class="center" data-sortField="startPage">Start Page</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="role: ${backUserRolePage.content}" class="clickable" th:formtarget="${role.id + '/view'}">
+            <td class="center">[[${role.id}]]</td>
+            <td class="center">[[${role.title}]]</td>
+            <td class="center">[[${role.startPage}]]</td>
+        </tr>
+        </tbody>
+        <tfoot th:replace="fragments/tables :: tableFooter(${backUserRolePage})"></tfoot>
+    </table>
+</div>
+
+</body>
+</html>

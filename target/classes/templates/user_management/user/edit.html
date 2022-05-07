@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}"
+      th:with="page='user_management', subpage='user'">
+
+<body>
+
+<div layout:fragment="header">
+    <h2>Users</h2>
+    <ol class="breadcrumb hidden-xs">
+        <li>[[#{company}]]</li>
+        <li>User Management</li>
+        <li><a th:href="@{/templates/user_management/user}">Users</a></li>
+        <li th:if="${backofficeUserAccountForm.id}">
+            <strong>[[${backofficeUserAccountForm.id}]]</strong>
+        </li>
+        <li th:if="${backofficeUserAccountForm.id}">Edit</li>
+        <li th:unless="${backofficeUserAccountForm.id}">Create</li>
+    </ol>
+</div>
+
+<div layout:fragment="content">
+    <form class="form-horizontal edit-user-form-js" method="post" autocomplete="off" th:object="${backofficeUserAccountForm}" role="form">
+
+        <input type="hidden" th:field="*{__${'id'}__}" th:value="id"/>
+        <div th:replace="fragments/control :: h3_hr('Details','100%', '1','#85adad')"></div>
+
+        <div class="clearfix">
+            <div class="col-lg-6">
+                <div th:replace="fragments/control :: inputtextlength ('First Name', 'firstName', 'required fioMask', '100')"></div>
+                <div th:replace="fragments/control :: inputtextlength ('Middle Name', 'middleName', 'required fioMask', '100')"></div>
+                <div th:replace="fragments/control :: inputtextlength ('Last Name', 'lastName', 'required fioMask', '100')"></div>
+            </div>
+            <div class="col-lg-6">
+                <div th:replace="fragments/control :: inputtext ('Email', 'email', 'required email')"></div>
+                <div th:replace="fragments/control :: inputtextlength ('Login', 'login', 'required login' ,'32')"></div>
+                <div th:replace="fragments/control :: inputtext ('Phone', 'phone', 'required phone-mask')"></div>
+            </div>
+        </div>
+        <div class="clearfix" th:if="${backofficeUserAccountForm.id == null}">
+            <div class="col-lg-6">
+                <div th:replace="fragments/control :: inputpassword ('Password', 'password', 'required password-mask')"></div>
+                <div
+                    th:replace="fragments/control:: inputpassword ('Password Confirmation', 'passwordConfirmation', 'required password-mask')"></div>
+            </div>
+        </div>
+        <div th:replace="fragments/control :: h3_hr('Authorities','100%', '1','#85adad')"></div>
+        <div class="clearfix">
+            <div class="col-lg-6">
+                <div th:replace="fragments/control:: singleSelect('Role', 'role.id', ${roleMap}, *{role?.id}, 'needsSelection')"></div>
+            </div>
+            <div class="col-lg-6">
+                <div th:replace="fragments/control:: checkbox('Super Admin', 'superUser', superUser, '')"></div>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="hr-line-dashed"></div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <div class="col-sm-8 col-sm-offset-4">
+                    <a class="btn btn-white btn-back" th:if="${backofficeUserAccountForm.id} == null" th:href="@{/templates/user_management/user}">Cancel</a>
+                    <a class="btn btn-white btn-back" th:if="${backofficeUserAccountForm.id} != null" th:href="@{'/user_management/user/' + ${backofficeUserAccountForm.id}}">Cancel</a>
+                    <button class="btn btn-primary" type="submit">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="clearfix" style="margin-bottom: 40px;"></div>
+</div>
+
+</body>
+</html>

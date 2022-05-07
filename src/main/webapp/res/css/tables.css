@@ -1,0 +1,51 @@
+.table-pageable tfoot {
+    background-color: #f3f3f4;
+}
+
+.table-pageable tfoot .fa:before {
+    position: relative;
+    top: -5px;
+}
+
+.table-pageable .border {
+    border-left: 1px solid #e7eaec;
+    margin-left: 2px;
+    margin-right: 4px;
+}
+
+table tr.clickable {
+    cursor: pointer;
+}
+
+table.dataTable thead {
+    background-color: #f3f3f4;
+}
+
+.view-data-title {
+    font-weight: bold;
+}
+
+.view-data-value {
+    text-align: left;
+    margin-left: 0;
+}
+
+.table-filter-container {
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.ibox-table-filter-container {
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+/**********for filters in library choosen.jquery.js
+***********data-placeholder incorrect display*********/
+li.search-field {
+    width: 100%;
+}
+
+li.search-field input.default {
+    width: 100% !important;
+}
+/********************************************************************/

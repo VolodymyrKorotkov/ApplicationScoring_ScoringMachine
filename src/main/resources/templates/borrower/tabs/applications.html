@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<div th:fragment="tab_content">
+    <h3>Applications</h3>
+
+    <div th:replace="fragments/control :: hr('100%', '1', '#85adad')"></div>
+
+    <th:block th:if="${applications.size() == 0}">
+        <div th:replace="fragments/control :: successAlert('No data to display')"></div>
+    </th:block>
+
+    <table th:if="${applications.size() > 0}" class="table table-bordered table-hover table-pageable table-sortable">
+        <thead>
+        <tr>
+            <th style="width: 60px;">#</th>
+            <th>Application Number</th>
+            <th>Application Data</th>
+            <th>Application Type</th>
+            <th>Application Amount, PHP</th>
+            <th>Approved Amount, PHP</th>
+            <th>Interest Rate (per day), %</th>
+            <th>Status Reason</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="app : ${applications}" class="clickable" th:href="@{'/application/' + ${app.id}}">
+            <td>[[${appStat.index} + 1]]</td>
+            <td>[[${app.number}]]</td>
+            <td>[[${#temporals.format(app.requestedAt, 'dd/MM/yyyy')}]]</td>
+            <td>[[${app.creditProduct.code}]]</td>
+            <td>[[${#numbers.formatDecimal(app.requestedAmount,1,'WHITESPACE',2,'DEFAULT')}]]</td>
+            <td>[[${#numbers.formatDecimal(app.confirmedAmount,1,'WHITESPACE',2,'DEFAULT')}]]</td>
+            <td th:text="${app.interestRate == null} ? '-' : ${app.interestRate.doubleValue() * 100}"></td>
+            <td th:text="${app.rejectReasonComment} ?: '-'"></td>
+            <td>[[${app.status}]]</td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="translations">
+    <script th:inline="javascript">
+        window.userLanguage = [[${#locale}]];
+        window.translations = {
+            chosen: {
+                noResultTextMsg: [[#{chosen.noResultText}]],
+                placeholder: [[#{chosen.placeholder}]]
+            },
+            dashboard: {
+                count_requested: 'Requested',
+                count_approved: 'Approved',
+                count_rejected: 'Rejected',
+                count_in_progress: 'In Progress',
+
+                amount_requested: 'Requested',
+                amount_approved: 'Approved',
+                amount_rejected: 'Rejected',
+                amount_in_progress: 'In Progress',
+                total_paid: 'Total Paid',
+                date: 'Date'
+            },
+            validator: {
+                messages: {
+                    required: [[#{javax.validation.constraints.NotBlank.message}]],
+                    needsSelection: [[#{validation.constraints.js.needSelection}]],
+                    notFutureDateTime: [[#{validation.constraints.js.notFutureDateTime}]],
+                    notPastDateTime:[[#{validation.constraints.js.notPastDateTime}]],
+                    beforeIssueDateTime: [[#{validation.constraints.js.beforeIssueDateTime}]],
+
+                    remote: [[#{validation.constraints.js.remote}]],
+                    email: [[#{validation.constraints.js.email}]],
+                    url: [[#{validation.constraints.js.url}]],
+                    date: [[#{validation.constraints.js.date}]],
+                    dateISO: [[#{validation.constraints.js.dateISO}]],
+                    number: [[#{validation.constraints.js.number}]],
+                    digits: [[#{validation.constraints.js.digits}]],
+                    creditcard: [[#{validation.constraints.js.creditcard}]],
+                    equalTo: [[#{validation.constraints.js.equalTo}]],
+                    extension: [[#{validation.constraints.js.extension}]],
+                    maxlength: [[#{validation.constraints.js.maxlength}]],
+                    minlength: [[#{validation.constraints.js.minlength}]],
+                    rangelength: [[#{validation.constraints.js.rangelength}]],
+                    range: [[#{validation.constraints.js.range}]],
+                    max: [[#{validation.constraints.js.max}]],
+                    min: [[#{validation.constraints.js.min}]],
+
+                    creditProduct: {
+                        maxAmountGreaterMin: [[#{validation.creditProduct.maxAmountGreaterMin.message}]],
+                        maxTermGreaterMin: [[#{validation.creditProduct.maxTermGreaterMin.message}]],
+                        maxProlongationTermGreaterMin: [[#{validator.messages.creditProduct.maxProlongationTermGreaterMin}]],
+                        maxDaysLeftBeforeAvailable: [[#{validator.messages.creditProduct.maxDaysLeftBeforeAvailable}]]
+                    },
+                    incorrectPhone: [[#{validation.constraints.Phone.message}]],
+                    invalidValue: [[#{validation.constraints.invalidValue}]],
+                    code: [[#{validation.constraints.code.message}]],
+                    vAmount: [[#{validation.constraints.vAmount.message}]],
+                    regex: [[#{validation.constraints.regex.message}]],
+                    requiredCheckbox: [[#{validation.constraints.required.checkbox.message}]],
+                    contactFio: [[#{validation.constraints.contactFio.message}]],
+                    fio: [[#{validation.constraints.fio.message}]],
+                    documentIdNumber: [[#{validation.constraints.document.id.number.message}]],
+                    amount: [[#{validation.constraints.amount.message}]],
+                    cron: [[#{validation.constraints.cron.message}]],
+                    textPattern: [[#{validation.constraints.textPattern.message}]],
+                    textPatternQoutes: [[#{validation.constraints.textPatternQoutes.message}]],
+                    textPatternExtended: [[#{validation.constraints.textPatternExtended.message}]],
+                    countryCode: [[#{validation.constraints.countryCode.message}]],
+                    minValue: [[#{validation.constraints.minValue.message}]],
+                    minValue50000: [[#{validation.constraints.minValue50000.message}]],
+                    minValue100: [[#{validation.constraints.minValue100.message}]],
+                    minValueProlongation: [[#{validation.constraints.minValueProlongation.message}]],
+                    maxGracePeriod: [[#{validation.constraints.maxGracePeriod.message}]],
+                    maxTerm: [[#{validation.constraints.maxTerm.message}]],
+                    maxProlongationTerm: [[#{validation.constraints.maxProlongationTerm.message}]],
+                    maxPaymentAmount: [[#{validation.constraints.maxPaymentAmount.message}]],
+                    occupationType: [[#{validation.constraints.occupationType.message}]],
+                    notEmpty: [[#{validation.constraints.notEmpty.message}]],
+                    validDate: [[#{validation.constraints.validDate.message}]],
+                    validProductMinAmount: [[#{validation.constraints.validProductMinAmount}]],
+                    promoCodeTitle: [[#{validation.constraints.promoCodeTitle}]],
+
+                    le: [[#{validation.constraints.le.message}]],
+                    ge: [[#{validation.constraints.ge.message}]],
+                    lt: [[#{validation.constraints.lt.message}]],
+                    gt: [[#{validation.constraints.gt.message}]],
+                    deleteDocument: [[#{validation.constraints.deleteDocument.message}]],
+                    error: [[#{validation.constraints.error.message}]],
+                    delete: [[#{validation.constraints.delete.message}]],
+                    download: [[#{validation.constraints.download.message}]],
+                    validUrl: [[#{validation.constraints.validUrl.message}]],
+                    notUniqueNumber: [[#{validation.constraints.notUniqueNumber.message}]],
+                    phoneChangingError: [[#{validation.constraints.phoneChangingError.message}]],
+                    photoSizeExceeded: [[#{validation.photo.maxSizeExceeded.message}]],
+                    documentSizeExceeded: [[#{validation.documentFile.maxSizeExceeded.message}]],
+                    fileSizeMin: [[#{validation.documentFile.minSizeExceeded.message}]],
+                    fileFormatExceeded: [[#{validation.documentFile.notSupportedFormat.message}]],
+                    fileLimit: [[#{validation.documentFile.fileLimit.message}]],
+                }
+            }
+        };
+    </script>
+</th:block>
+
+</html>

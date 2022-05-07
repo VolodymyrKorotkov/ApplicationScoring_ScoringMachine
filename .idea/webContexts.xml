@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebContextManager">
+    <option name="state">
+      <map>
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/fragments/layout.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/fragments" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/login.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/modelCreation/scoringModelAdvancedSettingsEdit.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/modelCreation" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/myProfile/myProfileEdit.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/myProfile" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/security/login-change-exp-password.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/security" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/security/login.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/security" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/security/registration.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/security" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/testingScoringModel/testingScoringModelList.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/testingScoringModel" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/tags/header-template.tag" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/tags" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/tags/navbar.tag" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/tags" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/tags/template.tag" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/tags" />
+      </map>
+    </option>
+  </component>
+</project>

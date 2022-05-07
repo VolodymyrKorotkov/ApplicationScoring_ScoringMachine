@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<!--/*@thymesVar id="genderEnum" type="com.hesfintech.core.borrowerAccount.type.Gender"*/-->
+<!--/*@thymesVar id="maritalStatusEnum" type="com.hesfintech.core.borrowerAccount.type.MaritalStatusEnum"*/-->
+<!--/*@thymesVar id="documentIdIssuePlaceEnum" type="com.hesfintech.core.borrowerAccount.enums.DocumentIdIssuePlace"*/-->
+<!--/*@thymesVar id="employmentTypeEnum" type="com.hesfintech.core.borrowerAccount.type.EmploymentType"*/-->
+<!--/*@thymesVar id="colleagueRelationshipTypeEnum" type="com.hesfintech.core.borrowerAccount.type.ColleagueRelationshipType"*/-->
+<!--/*@thymesVar id="driverLicenseTypeEnum" type="com.hesfintech.core.borrowerAccount.type.DriverLicenseType"*/-->
+<!--/*@thymesVar id="employmentDurationEnum" type="com.hesfintech.core.borrowerAccount.type.EmploymentDuration"*/-->
+<!--/*@thymesVar id="relationshipTypeEnum" type="com.hesfintech.core.borrowerAccount.type.RelationshipType"*/-->
+<!--/*@thymesVar id="borrowerForm" type="com.hesfintech.backoffice.borrowerAccount.form.BorrowerForm"*/-->
+<!--/*@thymesVar id="borrowerAlreadyExists" type="java.lang.Boolean"*/-->
+<!--/*@thymesVar id="personalDataUpdated" type="java.lang.Boolean"*/-->
+<!--/*@thymesVar id="sociologicalDataUpdated" type="java.lang.Boolean"*/-->
+<!--/*@thymesVar id="contactDataUpdated" type="java.lang.Boolean"*/-->
+<!--/*@thymesVar id="addressDataUpdated" type="java.lang.Boolean"*/-->
+<!--/*@thymesVar id="employmentDataUpdated" type="java.lang.Boolean"*/-->
+<!--/*@thymesVar id="relativesDataUpdated" type="java.lang.Boolean"*/-->
+<!--/*@thymesVar id="documentsDataUpdated" type="java.lang.Boolean"*/-->
+<!--/*@thymesVar id="success" type="java.lang.Boolean"*/-->
+<!--/*@thymesVar id="formAction" type="java.lang.String"*/-->
+
+<div th:fragment="personalData">
+
+    <th:block th:if="${borrowerAlreadyExists} != null and ${borrowerAlreadyExists}">
+        <div th:replace="fragments/control :: dangerAlert(#{validation.borrowerAlreadyExists.message})"></div>
+    </th:block>
+
+    <div id="borrowerPersonalDataSection" class="clearfix">
+        <div th:replace="fragments/control :: h2_hr(#{personalData}, '100%', '1', '#85adad')"></div>
+        <div th:replace="this :: sectionSubmissionResultMsg(${personalDataUpdated})"></div>
+        <div class="col-lg-6">
+            <div id="borrowerPersonalData">
+                <input type="hidden" name="id" th:value="${borrowerForm.id}"/>
+                <input type="hidden" name="mobilePhone" th:value="${borrowerForm.mobilePhone}"/>
+                <div th:replace="fragments/control :: inputtext(#{phone}, 'mobilePhone', 'required phone-mask disabled')"></div>
+                <div th:replace="fragments/control :: inputtext(#{lastName}, 'personalData.lastName', 'required fio-mask')"></div>
+                <div th:replace="fragments/control :: inputtext(#{middleName}, 'personalData.middleName', 'fio-mask')"></div>
+                <div th:replace="fragments/control :: inputtext(#{firstName}, 'personalData.firstName', 'required fio-mask')"></div>
+
+                <div th:replace="fragments/control :: singleSelect(#{gender}, 'personalData.gender', ${genderEnum}, ${borrowerForm.personalData.gender}, 'required needsSelection')"></div>
+                <div th:replace="fragments/control :: inputdate(#{birthDate}, 'personalData.birthDate', 'required')"></div>
+                <div th:replace="fragments/control :: inputtext(#{salary}, 'personalData.salary', 'required salary')"></div>
+                <div th:replace="fragments/control :: inputtext(#{email}, 'personalData.email', 'email-mask')"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div th:fragment="sociologicalData">
+
+    <div id="sociologicalDataSection" class="clearfix">
+        <div th:replace="fragments/control :: h2_hr(#{sociological}, '100%', '1', '#85adad')"></div>
+        <div th:replace="this :: sectionSubmissionResultMsg(${sociologicalDataUpdated})"></div>
+        <div class="col-lg-6">
+            <div th:replace="fragments/control :: inputtext(#{documentIdNumber}, 'personalData.documentIdNumber', 'required document-id-number-mask')"></div>
+            <div th:replace="fragments/control :: inputdate(#{documentIdIssueDate}, 'personalData.documentIdIssueDate', 'required not-future-date-time')"></div>
+            <div th:replace="fragments/control :: inputdate(#{documentIdValidUntil}, 'personalData.documentValidUntil', 'required not-past-date-time')"></div>
+            <div th:replace="fragments/control :: singleSelect(#{documentIdIssuePlace}, 'personalData.documentIdIssuePlace', ${documentIdIssuePlaceEnum}, ${borrowerForm.personalData.documentIdIssuePlace}, 'required needsSelection')"></div>
+            <div th:replace="fragments/control :: singleSelect(#{maritalStatus}, 'personalData.maritalStatus', ${maritalStatusEnum}, ${borrowerForm.personalData.maritalStatus}, 'needsSelection')"></div>
+            <div th:replace="fragments/control :: singleSelect(#{childrenNumber}, 'personalData.children',${childrenAmount},${borrowerForm.personalData.children}, 'needsSelection')"></div>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="registrationAddressData">
+
+    <div id="registrationAddressDataSection" class="clearfix">
+        <div th:replace="fragments/control :: h2_hr(#{registrationAddressData}, '100%', '1', '#85adad')"></div>
+        <div th:replace="this :: sectionSubmissionResultMsg(${addressDataUpdated})"></div>
+        <div class="col-lg-6">
+            <div th:replace="fragments/control :: singleSelect(#{regions}, 'registrationAddressData.region', ${regions}, ${borrowerForm.registrationAddressData.region}, 'registrationRegion needsSelection')"></div>
+            <div th:replace="fragments/control :: inputtext(#{city}, 'registrationAddressData.city', '50-char-spec registrationCity')"></div>
+            <div th:replace="fragments/control :: inputtext(#{street}, 'registrationAddressData.street', '50-char-spec')"></div>
+            <div th:replace="fragments/control :: inputtext(#{houseNumber}, 'registrationAddressData.houseNumber', '15-char-spec')"></div>
+            <div th:replace="fragments/control :: inputtext(#{houseApartmentRoomNumber}, 'registrationAddressData.houseApartmentRoomNumber', '15-char-spec')"></div>
+        </div>
+    </div>
+    <script th:inline="javascript">
+        $('.form-group').find('.registrationRegion').on('change',function (e) {
+            if ($(this).children("option:selected").index() <= 3 && $(this).children("option:selected").index() > 0) {
+                $('.form-group').find('.registrationCity').val($('.registrationRegion').find("span").text());
+                $('.form-group').find('.registrationCity').prop('readonly', true);
+            } else {
+                $('.form-group').find('.registrationCity').prop('readonly', false);
+            }
+        })
+    </script>
+</div>
+
+<div th:fragment="livingAddressData">
+
+    <div id="livingAddressDataSection" class="clearfix">
+        <div th:replace="fragments/control :: h2_hr(#{livingAddressData}, '100%', '1', '#85adad')"></div>
+        <div th:replace="this :: sectionSubmissionResultMsg(${addressDataUpdated})"></div>
+        <div class="col-lg-6">
+            <div th:replace="fragments/control :: singleSelect(#{regions}, 'livingAddressData.region', ${regions}, ${borrowerForm.livingAddressData.region}, 'livingRegion needsSelection')"></div>
+            <div th:replace="fragments/control :: inputtext(#{city}, 'livingAddressData.city', '50-char-spec livingCity')"></div>
+            <div th:replace="fragments/control :: inputtext(#{street}, 'livingAddressData.street', '50-char-spec')"></div>
+            <div th:replace="fragments/control :: inputtext(#{houseNumber}, 'livingAddressData.houseNumber', '15-char-spec')"></div>
+            <div th:replace="fragments/control :: inputtext(#{houseApartmentRoomNumber}, 'livingAddressData.houseApartmentRoomNumber', '15-char-spec')"></div>
+        </div>
+    </div>
+    <script th:inline="javascript">
+        $('.form-group').find('.livingRegion').on('change',function (e) {
+            if ($(this).children("option:selected").index() <= 3 && $(this).children("option:selected").index() > 0) {
+                $('.form-group').find('.livingCity').val($('.livingRegion').find("span").text());
+                $('.form-group').find('.livingCity').prop('readonly', true);
+            } else {
+                $('.form-group').find('.livingCity').prop('readonly', false);
+            }
+        })
+    </script>
+</div>
+
+<div th:fragment="employmentData">
+
+    <div id="employmentDataSection" class="clearfix">
+        <div th:replace="fragments/control :: h2_hr(#{jobInformation}, '100%', '1', '#85adad')"></div>
+        <div th:replace="this :: sectionSubmissionResultMsg(${employmentDataUpdated})"></div>
+        <div class="col-lg-6">
+            <div th:replace="fragments/control :: singleSelect(#{education}, 'personalData.education', ${educationTypeEnum}, ${borrowerForm.personalData.education}, 'required needsSelection')"></div>
+            <div th:replace="fragments/control :: singleSelect(#{employmentType}, 'personalData.employmentType', ${employmentTypeEnum}, ${borrowerForm.personalData.employmentType}, 'required needsSelection employment-type')"></div>
+
+            <div class="positions-details-js">
+                <div th:replace="fragments/control :: singleSelect(#{position}, 'personalData.position', ${positions}, ${borrowerForm.personalData.position}, '')"></div>
+            </div>
+            <div class="industry-details-js">
+                <div th:replace="fragments/control :: singleSelect(#{industry}, 'personalData.industry', ${industries}, ${borrowerForm.personalData.industry}, '')"></div>
+            </div>
+            <div class="company-name-details-js">
+                <div th:replace="fragments/control :: inputtext(#{companyName}, 'personalData.companyName', '')"></div>
+            </div>
+        </div>
+        <script th:inline="javascript">
+            var industryMapEl = $('#industryMap'),
+                positionMapEl = $('#positionMap');
+
+            $(document).ready(function (qualifiedName, value) {
+                getIndustryEl().change(updateOccupationTypeOptions);
+                getPositionTypeEl().change(updatePositionOptions);
+
+                updateEmploymentVisual($('.employment-type').find('.chosen-select').children("option:selected").val());
+
+                $('.employment-type').find('.chosen-select').on('change', function(evt, params) {
+                    var selectedValue = params.selected;
+                    updateEmploymentVisual(selectedValue);
+                });
+            });
+            function updateEmploymentVisual(selectedValue) {
+                if (['COMPANY_MEMBER', 'PENSIONER_COMPANY_MEMBER','INDIVIDUAL_ENTREPRENEUR_MEMBER','MATERNITY_LEAVE'].includes(selectedValue)) {
+                    $('.positions-details-js').css('display','block');
+                    $('.positions-details-js').find("input").each(function () {
+                        $(this).prop('disabled', false);
+                    });
+                    $('.positions-details-js').find("select").each(function () {
+                        $(this).addClass('needsSelection');
+                    });
+
+                } else {
+                    $('.positions-details-js').css('display','none');
+                    $('.positions-details-js').find("input").each(function () {
+                        $(this).prop('disabled', true);
+                    });
+                    $('.positions-details-js').find("select").each(function () {
+                        $(this).removeClass('needsSelection');
+                    });
+                }
+
+                if (['STUDENT', 'PENSIONER','UNEMPLOYED'].includes(selectedValue)) {
+                    $('.industry-details-js').css('display','none');
+                    $('.industry-details-js').find("input").each(function () {
+                        $(this).prop('disabled', true);
+                    });
+                    $('.industry-details-js').find("select").each(function () {
+                        $(this).removeClass('needsSelection');
+                    });
+                } else {
+                    $('.industry-details-js').css('display','block');
+                    $('.industry-details-js').find("input").each(function () {
+                        $(this).prop('disabled', false);
+                    });
+                    $('.industry-details-js').find("select").each(function () {
+                        $(this).addClass('needsSelection');
+                    });
+                }
+
+                if (['INDIVIDUAL_ENTREPRENEUR', 'SELF_EMPLOYED','COMPANY_OWNER',
+                    'UNEMPLOYED','STUDENT','PENSIONER','PENSIONER_INDIVIDUAL_ENTREPRENEUR'].includes(selectedValue)) {
+                    $('.company-name-details-js').css('display','none');
+                    $('.company-name-details-js').find("input").each(function () {
+                        $(this).prop('disabled', true);
+                        $(this).removeClass('required not-empty');
+                    });
+                } else {
+                    $('.company-name-details-js').css('display','block');
+                    $('.company-name-details-js').find("input").each(function () {
+                        $(this).prop('disabled', false);
+                        $(this).addClass('required not-empty');
+                    });
+                }
+            }
+            function updateOccupationTypeOptions() {
+                var occupationTypeEl = getOccupationTypeEl(),
+                    industry = getIndustryEl().val();
+
+                if (industry) {
+                    showDropdownContainer(getOccupationTypeContainer());
+                    dropSelectorOptionsExceptDefault(occupationTypeEl);
+                    occupationTypeEl.append(industryMapEl.find('.' + industry).html());
+                    triggerVgSelectUpdate(occupationTypeEl);
+                } else {
+                    hideDropdownContainer(getOccupationTypeContainer());
+                }
+            }
+
+            function updatePositionOptions() {
+                var positionEl = getPositionEl(),
+                    positionType = getPositionTypeEl().val();
+
+                if (positionType) {
+                    showDropdownContainer(getPositionContainer());
+                    dropSelectorOptionsExceptDefault(positionEl);
+                    positionEl.append(positionMapEl.find('.' + positionType).html());
+                    triggerVgSelectUpdate(positionEl);
+                } else {
+                    hideDropdownContainer(getPositionContainer());
+                }
+            }
+
+            function showDropdownContainer(selector) {
+                $(selector).removeClass('hidden');
+                $(selector).show('fast');
+            }
+
+            function hideDropdownContainer(selector) {
+                $(selector).hide('fast');
+            }
+
+            function getIndustryEl() {
+                return $('select[name="employmentData.industry"]');
+            }
+
+            function getOccupationTypeEl() {
+                return $('select[name="employmentData.occupationType"]');
+            }
+
+            function getOccupationTypeContainer() {
+                return $('#occupationTypeContainer');
+            }
+
+            function getPositionTypeEl() {
+                return $('select[name="employmentData.positionType"]');
+            }
+
+            function getPositionEl() {
+                return $('select[name="employmentData.position"]');
+            }
+
+            function getPositionContainer() {
+                return $('#positionContainer');
+            }
+
+            function dropSelectorOptionsExceptDefault(selector) {
+                $(selector).find('option').not(':first').remove();
+            }
+
+            //# sourceURL=borrowerAccount-edit_employment.js
+        </script>
+    </div>
+
+</div>
+
+
+<div th:fragment="submitSectionBlock(title, formAction)">
+    <div class="clearfix">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <div class="col-sm-8 col-sm-offset-4">
+                    <button type="submit" class="btn btn-primary" name="action" th:value="${formAction}">
+                        [[${title}]]
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="sectionSubmissionResultMsg(success)">
+    <div th:if="${success != null}">
+        <div th:if="${success == true}">
+        <div th:if="${success == true}">
+            <div th:replace="fragments/control :: successAlert(#{message.borrowerAccount.successfullyUpdated})"></div>
+        </div>
+        <div th:if="${success == false}">
+            <div th:replace="fragments/control :: dangerAlert(#{message.borrowerAccount.errorUpdatingSection})"></div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

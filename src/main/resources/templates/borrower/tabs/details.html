@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      th:with="page='borrowerAccount'">
+
+<body>
+<div th:fragment="tab_content(borrowerAccount)" sec:authorize="hasAuthority('BORROWER_VIEW')">
+    <div th:replace="fragments/control :: h3_hr('Personal Data', '100%', '1', '#85adad')"></div>
+    <div class="clearfix"></div>
+
+    <div class="col-lg-4">
+        <div
+            th:replace="fragments/control :: viewDataWithAudit('Title', ${borrowerAccount.personalData.title.title}, 'personalData.title', ${changesHistory}, true)"></div>
+        <div
+            th:replace="fragments/control :: viewDataWithAudit('First Name', ${borrowerAccount.personalData.firstName}, 'personalData.firstName', ${changesHistory}, true)"></div>
+        <div
+            th:replace="fragments/control :: viewDataWithAudit('Middle Name', ${borrowerAccount.personalData.middleName}, 'personalData.middleName', ${changesHistory}, true)"></div>
+        <div
+            th:replace="fragments/control :: viewDataWithAudit('Last Name', ${borrowerAccount.personalData.lastName}, 'personalData.lastName', ${changesHistory}, true)"></div>
+    </div>
+
+    <div class="col-lg-4">
+        <div
+            th:replace="fragments/control :: viewDateDataWithAudit('Birth Date', ${borrowerAccount.personalData.birthDate}, 'dd.MM.yyyy', 'personalData.birthDate', ${changesHistory}, true)"></div>
+        <div
+            th:replace="fragments/control :: viewDataWithAudit('Number Of Dependents', ${borrowerAccount.personalData.dependants.title}, 'personalData.dependants', ${changesHistory}, true)"></div>
+        <div
+            th:replace="fragments/control :: viewDataWithAudit('SSS Number', ${borrowerAccount.personalData.sssNumber}, 'personalData.sssNumber', ${changesHistory}, true)"></div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div th:replace="fragments/control :: h3_hr('Contact Details', '100%', '1', '#85adad')"></div>
+    <div class="clearfix"></div>
+
+    <div class="col-lg-4">
+        <div
+            th:replace="fragments/control :: viewDataWithAudit('Phone Number', ${borrowerAccount.contactDetails.phoneNumber}, 'contactDetails.phoneNumber', ${changesHistory}, true)"></div>
+        <div
+            th:replace="fragments/control :: viewDataWithAudit('Additional Phone Number', ${borrowerAccount.contactDetails.additionalPhoneNumber}, 'contactDetails.additionalPhoneNumber', ${changesHistory}, true)"></div>
+        <div
+            th:replace="fragments/control :: viewDataWithAudit('Email', ${borrowerAccount.contactDetails.email}, 'contactDetails.email', ${changesHistory}, true)"></div>
+    </div>
+
+    <div class="col-lg-4">
+        <div
+            th:replace="fragments/control :: viewDataWithAudit('House Number/Street', ${borrowerAccount.contactDetails.presentAddress.addressLine}, 'contactDetails.presentAddress.addressLine', ${changesHistory}, true)"></div>
+        <div
+            th:replace="fragments/control :: viewDataWithAudit('Barangay', ${borrowerAccount.contactDetails.presentAddress.barangay}, 'contactDetails.presentAddress.barangay', ${changesHistory}, true)"></div>
+        <div
+            th:replace="fragments/control :: viewDataWithAudit('City', ${borrowerAccount.contactDetails.presentAddress.city}, 'contactDetails.presentAddress.city', ${changesHistory}, true)"></div>
+        <div
+            th:replace="fragments/control :: viewDataWithAudit('Zip Code', ${borrowerAccount.contactDetails.presentAddress.zipCode}, 'contactDetails.presentAddress.zipCode', ${changesHistory}, true)"></div>
+    </div>
+
+    <div class="col-lg-4">
+        <div
+            th:replace="fragments/control :: viewDataWithAudit('Residential Status', ${borrowerAccount.contactDetails.residentialStatus.title}, 'contactDetails.residentialStatus', ${changesHistory}, true)"></div>
+        <div
+            th:replace="fragments/control :: viewDataWithAudit('Time At Address', ${borrowerAccount.contactDetails.timeAtAddress.title}, 'contactDetails.timeAtAddress', ${changesHistory}, true)"></div>
+    </div>
+
+
+    <div class="clearfix"></div>
+    <div th:replace="fragments/control :: h3_hr('Employment Details', '100%', '1', '#85adad')"></div>
+    <div class="clearfix"></div>
+
+    <div class="col-lg-4">
+        <div
+            th:replace="fragments/control :: viewDataWithAudit('Employer Status', ${borrowerAccount.employmentDetails?.employmentStatus?.title}, 'employmentDetails.employmentStatus', ${changesHistory}, true)"></div>
+        <div
+            th:replace="fragments/control :: viewDataWithAudit('Employer Name', ${borrowerAccount.employmentDetails?.employerName}, 'employmentDetails.employerName', ${changesHistory}, true)"></div>
+        <div
+            th:replace="fragments/control :: viewDataWithAudit('Employer Phone Number', ${borrowerAccount.employmentDetails?.employerPhoneNumber}, 'employmentDetails.employerPhoneNumber', ${changesHistory}, true)"></div>
+    </div>
+
+    <div class="col-lg-4">
+        <div
+            th:replace="fragments/control :: viewDataWithAudit('House Number/Street', ${borrowerAccount.employmentDetails.employerAddress.addressLine}, 'employmentDetails.employerAddress.addressLine', ${changesHistory}, true)"></div>
+        <div
+            th:replace="fragments/control :: viewDataWithAudit('Barangay', ${borrowerAccount.employmentDetails.employerAddress.barangay}, 'employmentDetails.employerAddress.barangay', ${changesHistory}, true)"></div>
+        <div
+            th:replace="fragments/control :: viewDataWithAudit('City', ${borrowerAccount.employmentDetails.employerAddress.city}, 'employmentDetails.employerAddress.city', ${changesHistory}, true)"></div>
+        <div
+            th:replace="fragments/control :: viewDataWithAudit('Zip Code', ${borrowerAccount.employmentDetails.employerAddress.zipCode}, 'employmentDetails.employerAddress.zipCode', ${changesHistory}, true)"></div>
+    </div>
+
+    <div class="col-lg-4">
+        <div
+            th:replace="fragments/control :: viewDataWithAudit('Industry Sector', ${borrowerAccount.employmentDetails?.industrySector?.title}, 'employmentDetails.industrySector', ${changesHistory}, true)"></div>
+        <div
+            th:replace="fragments/control :: viewDataWithAudit('Job Title', ${borrowerAccount.employmentDetails?.jobTitle}, 'employmentDetails.jobTitle', ${changesHistory}, true)"></div>
+        <div
+            th:replace="fragments/control :: viewDataWithAudit('Salary Amount', ${borrowerAccount.employmentDetails?.salaryAmount}, 'employmentDetails.salaryAmount', ${changesHistory}, true)"></div>
+        <div
+            th:replace="fragments/control :: viewDataWithAudit('Length Of Employment', ${borrowerAccount.employmentDetails?.lengthOfEmployment?.title}, 'employmentDetails.lengthOfEmployment', ${changesHistory}, true)"></div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div th:replace="fragments/control :: h3_hr('Bank Information', '100%', '1', '#85adad')"></div>
+    <div class="clearfix"></div>
+    <div class="col-lg-4">
+        <div
+            th:replace="fragments/control :: viewDataWithAudit('Bank Name', ${borrowerAccount.bankDetails?.bank?.bankName?.title}, 'bankDetails.bank.title', ${changesHistory}, true)"></div>
+        <div
+            th:replace="fragments/control :: viewDataWithAudit('Bank Account Number', ${borrowerAccount.bankDetails?.bankAccountNumber}, 'bankDetails.bankAccountNumber', ${changesHistory}, true)"></div>
+        <div
+            th:replace="fragments/control :: viewDataWithAudit('Do You Have A Debit Card Attached To This Bank Account ?', ${borrowerAccount.bankDetails?.debitCardAttachedToBankAccount}? 'Yes' : 'No', 'bankDetails.debitCardAttachedToBankAccount', ${changesHistory}, true)"></div>
+    </div>
+
+</div>
+
+</body>
+</html>

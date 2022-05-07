@@ -1,0 +1,8 @@
+.photos {
+    justify-content: space-between;
+    display: flex
+}
+
+.photos > *:not(:last-child) {
+    margin-right: 8px;
+}

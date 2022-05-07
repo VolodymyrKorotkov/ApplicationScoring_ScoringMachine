@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:fragment="filter-text(name, fieldAndParamName, inputclass)" class="form-group">
+    <label>[[${name}]]</label>
+    <input type="text" th:id="${fieldAndParamName}" class="form-control" th:classappend="${inputclass}" th:name="${fieldAndParamName}"
+           th:value="${param.get(fieldAndParamName)}">
+</div>
+
+<div th:fragment="filter-multi-select(values, name, fieldAndParamName, inputclass)" class="form-group">
+    <label>[[${name}]]</label>
+    <div>
+        <select th:name="${fieldAndParamName}"
+                th:id="${fieldAndParamName}"
+                th:attr="data-placeholder=#{chooseValue}"
+                class="chosen-select"
+                th:classappend="${inputclass}"
+                multiple
+                tabindex="4">
+                <option th:if="${values instanceof T(java.util.Map)}" th:each="value : ${values}" th:value="${value.key}" th:text="${value.value}"></option>
+                <option th:unless="${values instanceof T(java.util.Map)}" th:each="item : ${values}" th:value="${item}" th:text="${#localization.name(item)}"></option>
+        </select>
+    </div>
+</div>
+
+<div th:fragment="filter-multi-select-entity-projection(values, name, fieldAndParamName, inputclass)" class="form-group">
+    <label>[[${name}]]</label>
+    <div>
+        <select th:name="${fieldAndParamName}"
+                th:id="${fieldAndParamName}"
+                th:attr="data-placeholder=#{chooseValue}"
+                class="chosen-select"
+                th:classappend="${inputclass}"
+                multiple
+                tabindex="4">
+            <option th:each="value : ${values}" th:value="${value.id}" th:text="${value.title}"></option>
+        </select>
+    </div>
+</div>
+
+<div th:fragment="filter-single-select(values, name, fieldAndParamName, inputclass)" class="form-group">
+    <label>[[${name}]]</label>
+    <div>
+        <select th:name="${fieldAndParamName}"
+                th:id="${fieldAndParamName}"
+                th:attr="data-placeholder=#{chooseValue}"
+                class="chosen-select"
+                th:classappend="${inputclass}"
+                tabindex="4">
+            <option th:if="${values instanceof T(java.util.Map)}" th:each="value : ${values}" th:value="${value.key}" th:text="${value.value}"></option>
+            <option th:unless="${values instanceof T(java.util.Map)}" th:each="item : ${values}" th:value="${item}" th:text="${#localization.name(item)}"></option>
+        </select>
+    </div>
+</div>
+
+<div th:fragment="filter-date(name, fieldAndParamName, inputclass)" class="form-group">
+    <label>[[${name}]]</label>
+    <div class="input-group date" th:classappend="${inputclass}">
+                    <span class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </span>
+        <input type="text" class="form-control date-mask"  th:name="${fieldAndParamName}" th:value="${param.get(fieldAndParamName)}">
+    </div>
+</div>
+
+<tfoot th:fragment="tableFooter(page)">
+<tr>
+    <td colspan="999">
+
+        <div class="pull-right">
+
+            <button class="btn btn-default btn-circle btn-xs fa fa-angle-double-left table-filter-btn hidden-xs" type="button"
+                    th:attr="data-page=0"
+                    th:disabled="${!page.hasPrevious()}">
+            </button>
+
+            <button class="btn btn-default btn-circle btn-xs fa fa-angle-left table-filter-btn hidden-xs" type="button"
+                    th:attr="data-page=${page.number > 0 ? page.number - 1 : 0}"
+                    th:disabled="${!page.hasPrevious()}">
+            </button>
+
+            <span class="border hidden-xs"></span>
+            <span class="hidden-xs">Page</span>
+
+            <input class="prsentr" style="text-align: center" type="text" size="2" maxlength="7" value="0" name="page"
+                   th:value="${page.number + 1}"/> of [[${page.totalPages==0? page.totalPages+1 : page.totalPages}]]
+            <span class="border hidden-xs"></span>
+
+            <button class="btn btn-default btn-circle btn-xs fa fa-angle-right table-filter-btn hidden-xs" type="button"
+                    th:attr="data-page=${page.number + 1}"
+                    th:disabled="${!page.hasNext()}">
+            </button>
+
+            <button class="btn btn-default btn-circle btn-xs fa fa-angle-double-right table-filter-btn hidden-xs" type="button"
+                    th:attr="data-page=${page.totalPages -1}"
+                    th:disabled="${!page.hasNext()}">
+            </button>
+
+
+            <select class="selCnt" name="size">
+                <option value="5" th:selected="${page.size == 5}">5</option>
+                <option value="10" th:selected="${page.size == 10}">10</option>
+                <option value="20" th:selected="${page.size == 20}">20</option>
+                <option value="50" th:selected="${page.size == 50}">50</option>
+                <option value="100" th:selected="${page.size == 100}">100</option>
+            </select>
+
+            <script>
+                $('.prsentr').keypress(function(event){
+                    var keycode = (event.keyCode ? event.keyCode : event.which);
+                    if(keycode == '13'){
+                        var iPage = event.target.value;
+                        if(!(Math.floor(iPage) == iPage && $.isNumeric(iPage))){
+                            iPage = 1;
+                        }
+
+                        var iSize = $('.selCnt')[0].value;
+                        if(!(Math.floor(iSize) == iSize && $.isNumeric(iSize))){
+                            iSize = 10;
+                        }
+
+                        var requestPath = /*[[@{/}]]*/ '';
+                        $(location).attr('href', requestPath + '?sf=false&size=' + iSize + '&page=' + (iPage-1));
+                    }
+                });
+            </script>
+        </div>
+
+        <div class="hidden-xs" style="padding-top: 5px;" th:with="firstRow=${page.number * page.size + 1}, lastRow=${firstRow + page.numberOfElements - 1}">
+            <div th:hidden="*{firstRow - 1} == ${lastRow}">Showing entries from [[${firstRow}]] to [[${lastRow}]] from [[${page.totalElements}]]</div>
+            <div th:hidden="*{firstRow - 1} != ${lastRow}">Showing entries from [[${firstRow}-1]] to [[${lastRow}]] from [[${page.totalElements}]]</div>
+        </div>
+    </td>
+</tr>
+</tfoot>
+
+
+</body>
+</html>

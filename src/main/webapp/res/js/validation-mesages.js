@@ -1,0 +1,19 @@
+$.extend( $.validator.messages, {
+    required: translations.validator.messages.required,
+    remote: translations.validator.messages.remote,
+    email: translations.validator.messages.email,
+    url: translations.validator.messages.url,
+    date: translations.validator.messages.date,
+    dateISO: translations.validator.messages.dateISO,
+    number: translations.validator.messages.number,
+    digits: translations.validator.messages.digits,
+    creditcard: translations.validator.messages.creditcard,
+    equalTo: translations.validator.messages.equalTo,
+    extension: translations.validator.messages.extension,
+    maxlength: $.validator.format(translations.validator.messages.maxlength),
+    minlength: $.validator.format(translations.validator.messages.minlength),
+    rangelength: $.validator.format(translations.validator.messages.rangelength),
+    range: $.validator.format(translations.validator.messages.range),
+    max: $.validator.format(translations.validator.messages.max),
+    min: $.validator.format(translations.validator.messages.min)
+} );

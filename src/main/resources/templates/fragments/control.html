@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<!--------------------------------------------------------------------------------------------------------------------->
+<!-------------------------------------VIEW FRAGMENTS------------------------------------------------------------------>
+<!--------------------------------------------------------------------------------------------------------------------->
+<th:block th:fragment="booleanStatus(value)">
+    <span>[[${#localization.name(value ? 'active' : 'inactive')}]]</span>
+</th:block>
+
+<th:block th:fragment="decimal(value)">
+    <span>[[${{value !=null ? #numbers.formatDecimal(value, 1, 'WHITESPACE', 2, 'DEFAULT') : '-'}}]]</span>
+</th:block>
+
+<th:block th:fragment="viewdata(title, value)">
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="col-lg-12 view-data-title">[[${title}]]</div>
+        <div class="col-lg-12 view-data-key">[[${{value?:'-'}}]]</div>
+    </div>
+</th:block>
+
+<th:block th:fragment="viewDecimalData(title, value)">
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="col-lg-12 view-data-title">[[${title}]]</div>
+        <div class="col-lg-12 view-data-key">[[${{value!=null?#numbers.formatDecimal(value,1,'WHITESPACE',2,'DEFAULT') :'-'}}]]</div>
+
+    </div>
+</th:block>
+
+<th:block th:fragment="viewRateValue(title, value)">
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="col-lg-12 view-data-title">[[${title}]]</div>
+        <div class="col-lg-12 view-data-key">[[${{value!=null ? value.doubleValue() * 100 :'-'}}]]</div>
+    </div>
+</th:block>
+
+<th:block th:fragment="viewAmountData(title, value)">
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="col-lg-12 view-data-title">[[${title}]]</div>
+        <div class="col-lg-12 view-data-key">[[${{value!=null?#numbers.formatDecimal(value,1,'WHITESPACE',2,'DEFAULT'):'-'}}]]</div>
+    </div>
+</th:block>
+
+<th:block th:fragment="viewEnumData(title, value)">
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="col-lg-12 view-data-title">[[${title}]]</div>
+        <div class="col-lg-12 view-data-key">[[${{value!=null? #localization.name(value):'-'}}]]</div>
+    </div>
+</th:block>
+
+<th:block th:fragment="viewPhoneData(title, value)">
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="col-lg-12 view-data-title">[[${title}]]</div>
+        <div class="col-lg-12 view-data-key">
+            <th:block th:if="${value}!=null">
+                <span th:text="${value}"></span>
+            </th:block>
+            <span th:if="${#strings.isEmpty(value)}">-</span>
+        </div>
+    </div>
+</th:block>
+
+<th:block th:fragment="viewYesNoData(title, value)">
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="col-lg-12 view-data-title">[[${title}]]</div>
+        <div class="col-lg-12 view-data-key">[[${#localization.name(value ? 'yes' : 'no')}]]</div>
+    </div>
+</th:block>
+
+<th:block th:fragment="viewDateData(title, value, format)">
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="col-lg-12 view-data-title">[[${title}]]</div>
+        <div th:if="${!#strings.isEmpty(value)}" class="col-lg-12 view-data-key">[[${#temporals.format(value, format)}]]</div>
+        <div th:unless="!${#strings.isEmpty(value)}" class="col-lg-12 view-data-key">-</div>
+    </div>
+</th:block>
+
+<th:block th:fragment="viewdataWithLink(title, value, link)">
+    <div class="row" style="margin-bottom: 5px;">
+        <div class="col-lg-12 view-data-title">[[${title}]]</div>
+        <div class="col-lg-12 view-data-key"><a th:href="${link}">[[${{value?:'-'}}]]</a></div>
+    </div>
+</th:block>
+
+<th:block th:fragment="viewDataOrDataWithLink(label, value, link, permissions)">
+    <div th:if="${#authorization.expr('hasAuthority(''' + permissions + ''')')}">
+        <div th:replace="this :: viewdataWithLink(${label}, ${value}, ${link})"></div>
+    </div>
+    <div th:unless="${#authorization.expr('hasAuthority(''' + permissions + ''')')}">
+        <div th:replace="this :: viewdata(${label}, ${value})"></div>
+    </div>
+</th:block>
+
+
+<!--------------------------------------------------------------------------------------------------------------------->
+<!-------------------------------------INPUT FRAGMENTS----------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------------------->
+<th:block th:fragment="inputtext(title, name, class)">
+    <div class="form-group" th:classappend="${#fields.hasErrors(name)} ? 'has-error'">
+        <label th:for="${name}" class="col-sm-4 control-label" th:text="${title}">Stub</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control not-empty" th:classappend="${class}" th:id="${name}" th:field="*{__${name}__}"
+                   autocomplete="off" maxlength="255">
+            <th:block th:if="${#fields.hasErrors(name)}">
+                <span class="help-block error" th:each="err : ${#fields.errors(name)}" th:text="${err}">[[#{invalidValue<}]]</span>
+            </th:block>
+        </div>
+    </div>
+</th:block>
+
+<th:block th:fragment="inputtextlength(title, name, class , length)">
+    <div class="form-group" th:classappend="${#fields.hasErrors(name)} ? 'has-error'">
+        <label th:for="${name}" class="col-sm-4 control-label" th:text="${title}">Stub</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control not-empty" th:classappend="${class}" th:id="${name}" th:field="*{__${name}__}"
+                   autocomplete="off" th:maxlength="${length}">
+            <th:block th:if="${#fields.hasErrors(name)}">
+                <span class="help-block error" th:each="err : ${#fields.errors(name)}" th:text="${err}">[[#{invalidValue<}]]</span>
+            </th:block>
+        </div>
+    </div>
+</th:block>
+
+<th:block th:fragment="inputpassword(title, name, class)">
+    <div class="form-group" th:classappend="${#fields.hasErrors(name)} ? 'has-error'">
+        <label th:for="${name}" class="col-sm-4 control-label" th:text="${title}">Stub</label>
+        <div class="col-sm-8">
+            <input type="password" class="form-control" th:classappend="${class}" th:id="${name}" th:field="*{__${name}__}" autocomplete="off"
+                   maxlength="255">
+            <th:block th:if="${#fields.hasErrors(name)}">
+                <span class="help-block error" th:each="err : ${#fields.errors(name)}" th:text="${err}">[[#{invalidValue}]]</span>
+            </th:block>
+        </div>
+    </div>
+</th:block>
+
+
+<div th:fragment="inputdate(title, name, inputclass)">
+    <div class="form-group" th:classappend="${#fields.hasErrors(name)} ? 'has-error'">
+        <label th:for="${name}" class="col-sm-4 control-label" th:text="${title}">Stub</label>
+        <div class="col-sm-8">
+            <div class="input-group date">
+                    <span class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </span>
+                <input type="text" th:classappend="${inputclass}" class="form-control date-mask"  th:id="${name}" th:field="*{__${name}__}" autocomplete="off" th:name="${name}" th:value="*{__${name}__}">
+            </div>
+            <th:block th:if="${#fields.hasErrors(name)}">
+                <span class="help-block error" th:each="err : ${#fields.errors(name)}" th:text="${err}">[[#{invalidValue}]]</span>
+            </th:block>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="inputdatetime(title, name, inputclass)">
+    <div class="form-group" th:classappend="${#fields.hasErrors(name)} ? 'has-error'">
+        <label th:for="${name}" class="col-sm-4 control-label" th:text="${title}">Stub</label>
+        <div class="col-sm-8">
+            <div class="input-group datetime">
+                <input type="text" th:classappend="${inputclass}" class="form-control datetime-mask"  th:id="${name}" th:field="*{__${name}__}" autocomplete="off" th:name="${name}" th:value="*{__${name}__}">
+                <span class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </span>
+            </div>
+            <th:block th:if="${#fields.hasErrors(name)}">
+                <span class="help-block error" th:each="err : ${#fields.errors(name)}" th:text="${err}">[[#{invalidValue}]]</span>
+            </th:block>
+        </div>
+    </div>
+</div>
+
+
+<th:block th:fragment="singleSelect(title, name, values, value, class)">
+
+    <div class="form-group" th:classappend="|${#fields.hasErrors(name) ? 'has-error': ''} ${class}|">
+        <label th:for="${name}" class="col-sm-4 control-label" th:text="${title}">Stub</label>
+        <div class="col-sm-8">
+            <select class="chosen-select" tabindex="2" th:name="${name}" th:id="${name}" th:classappend="${class}">
+                <option value="">Select Value</option>
+                <option th:if="${values instanceof T(java.util.Map)}" th:each="entry : ${values}"
+                        th:value="${entry.key}"
+                        th:text="${#localization.name(entry.value)}"
+                        th:selected="${value != null} and ${value == entry.key}"></option>
+
+                <option th:unless="${values instanceof T(java.util.Map)}" th:each="item : ${values}" th:value="${item}"
+                        th:text="${#localization.name(item)}"
+                        th:selected="${value != null} and ${value == item}"></option>
+            </select>
+
+            <th:block th:if="${#fields.hasErrors(name)}">
+                <span class="help-block error" th:each="err : ${#fields.errors(name)}" th:text="${err}">[[#{invalidValue}]]</span>
+            </th:block>
+        </div>
+
+    </div>
+</th:block>
+
+<th:block th:fragment="singleSelectEnumByString(title, name, values, value, class)">
+
+    <div class="form-group" th:classappend="|${#fields.hasErrors(name) ? 'has-error': ''} ${class}|">
+        <label th:for="${name}" class="col-sm-4 control-label" th:text="${title}">Stub</label>
+        <div class="col-sm-8">
+
+            <select id="role" class="chosen-select needsSelection" tabindex="2" th:name="${name}" th:id="${name}">
+                <option value="">[[#{selectValue}]]</option>
+                <option th:unless="${values instanceof T(java.util.Map)}" th:each="item : ${values}" th:value="${item}"
+                        th:text="${#localization.name(item)}"
+                        th:selected="${value != null} and ${value == item.name()}"></option>
+            </select>
+
+            <th:block th:if="${#fields.hasErrors(name)}">
+                <span class="help-block error" th:each="err : ${#fields.errors(name)}" th:text="${err}">[[#{invalidValue}]]</span>
+            </th:block>
+        </div>
+
+    </div>
+</th:block>
+
+
+<th:block th:fragment="multiSelect(title, field, currentValues, values, inputclass)">
+    <div class="form-group" th:classappend="|${#fields.hasErrors(field) ? 'has-error': ''} ${inputclass}|">
+        <label class="col-sm-4 control-label" th:for="${name}">[[${title}]]</label>
+        <div class="col-sm-8">
+            <select th:name="${field}" th:id="${#strings.replace(field, '.', '')}"
+                    th:attr="data-placeholder='Select Value'" class="chosen-select"
+                    th:classappend="${inputclass}" multiple tabindex="4">
+                <option th:if="${values instanceof T(java.util.Map)}" th:each="entry : ${values}"
+                        th:value="${entry.key}"
+                        th:text="${#localization.name(entry.value)}"></option>
+                <option th:unless="${values instanceof T(java.util.Map)}" th:each="value : ${values}"
+                        th:value="${value}"
+                        th:text="${#localization.name(value)}"></option>
+            </select>
+            <th:block th:if="${#fields.hasErrors(field)}">
+                <span class="help-block error" th:each="err : ${#fields.errors(field)}" th:text="${err}">[[#{invalidValue}]]</span>
+            </th:block>
+        </div>
+    </div>
+    <script th:inline="javascript">/*<![CDATA[*/
+    var selected = [[${currentValues}]];
+    if (selected && selected.length > 0)
+        $.each(selected, function (idx, element) {
+            var optVal = element.id === undefined ? element : element.id;
+            $('select[name="' + [[${field}]] + '"] option[value="' + optVal + '"]').attr('selected', 'selected');
+        });
+    $('#' + [[${#strings.replace(field, '.', '')}]]).trigger("chosen:updated");
+    /*]]>*/</script>
+</th:block>
+<!--Components initial values works only with property editors configured on spring mvc level!!! See TagsInputCollectionPropertyEditor-->
+<th:block th:fragment="tagsinput(title, name)">
+    <div class="form-group" th:classappend="${#fields.hasErrors(name)} ? 'has-error'">
+        <label th:for="${name}" class="col-sm-4 control-label" th:text="${title}">Stub</label>
+        <div class="col-sm-8">
+            <input type="text" class="tags-input form-control" th:id="${name}" th:field="*{__${name}__}">
+            <th:block th:if="${#fields.hasErrors(name)}">
+                <span class="help-block error" th:each="err : ${#fields.errors(name)}" th:text="${err}">[[#{invalidValue}]]</span>
+            </th:block>
+        </div>
+    </div>
+</th:block>
+</th:block>
+
+<div th:fragment="checkbox(title, name, checked, class)">
+    <div class="form-group"  th:classappend="${#fields.hasErrors(name)} ? 'has-error'">
+        <label class="col-sm-4 control-label">[[${title}]]</label>
+        <div class="col-sm-8">
+            <div class="i-checks" th:classappend="${class}">
+                <input type="checkbox" th:value="*{__${checked}__}" th:checked="*{__${checked}__}" th:field="*{__${name}__}">
+                <i></i>
+            </div>
+            <th:block th:if="${#fields.hasErrors(name)}">
+                <span class="help-block error" th:each="err : ${#fields.errors(name)}" th:text="${err}">[[#{invalidValue}]]</span>
+            </th:block>
+        </div>
+    </div>
+</div>
+
+
+
+<div th:fragment="textarea(title, name, inputclass)">
+    <div class="form-group" th:classappend="${#fields.hasErrors(name)}? 'has-error'">
+        <label th:for="${name}" class="col-sm-4 control-label">[[${title}]]</label>
+        <div class="col-sm-8">
+            <textarea class="form-control" th:classappend="${inputclass}" th:id="${name}" th:field="*{__${name}__}"></textarea>
+            <th:block th:if="${#fields.hasErrors(name)}">
+                <span class="help-block error" th:each="err : ${#fields.errors(name)}" th:text="${err}">[[#{invalidValue}]]</span>
+            </th:block>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="textareaWithMaxLength(title, name, inputclass, maxlength, rows)">
+    <div class="form-group" th:classappend="${#fields.hasErrors(name)}? 'has-error'">
+        <label th:for="${name}" class="col-sm-4 control-label">[[${title}]]</label>
+        <div class="col-sm-8">
+            <textarea th:rows="${rows}" th:maxlength="${maxlength}" class="form-control" th:classappend="${inputclass}" th:id="${name}" th:field="*{__${name}__}"></textarea>
+            <th:block th:if="${#fields.hasErrors(name)}">
+                <span class="help-block error" th:each="err : ${#fields.errors(name)}" th:text="${err}">[[#{invalidValue}]]</span>
+            </th:block>
+        </div>
+    </div>
+</div>
+
+<!--------------------------------------------------------------------------------------------------------------------->
+<!-------------------------------------HR FRAGMENTS-------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------------------->
+<th:block th:fragment="hr(width, size,color)">
+    <div class="hr-line-dashed"></div>
+</th:block>
+
+<th:block th:fragment="h2_hr(name,width, size,color)">
+    <h2  th:text="${name}"></h2>
+    <div th:replace="fragments/control :: hr(${width},${size},${color})"></div>
+</th:block>
+
+<th:block th:fragment="h3_hr(name,width, size,color)">
+    <h3 th:text="${name}"></h3>
+    <div th:replace="fragments/control :: hr(${width},${size},${color})"></div>
+</th:block>
+
+<th:block th:fragment="h4_hr(name,width, size,color)">
+    <h4 th:text="${name}"></h4>
+    <div th:replace="fragments/control :: hr(${width},${size},${color})"></div>
+</th:block>
+
+<!--------------------------------------------------------------------------------------------------------------------->
+<!-------------------------------------ALERTS-------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------------------->
+<th:block th:fragment="successAlert(message)">
+    <th:block th:if="${message}!=null">
+    <div class="alert alert-success alert-dismissable">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            [[${message}]]
+        </div>
+    </th:block>
+</th:block>
+<th:block th:fragment="successAlertWithBackLink(message, link)">
+    <th:block th:if="${message}!=null">
+        <div class="alert alert-success alert-dismissable">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            [[${message}]] <a th:href="${link}">[[#{message.blacklist.backToUserPage}]]</a>
+        </div>
+    </th:block>
+</th:block>
+
+<th:block th:fragment="dangerAlert(message)">
+    <th:block th:if="${message}!=null">
+        <div class="alert alert-danger alert-dismissable">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            [[${message}]]
+        </div>
+    </th:block>
+</th:block>
+
+<th:block th:fragment="warningAlert(message)">
+    <th:block th:if="${message}!=null">
+        <div class="alert alert-warning alert-dismissable">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            [[${message}]]
+        </div>
+    </th:block>
+</th:block>
+
+
+<!--------------------------------------------------------------------------------------------------------------------->
+<!-------------------------------------AUDIT FRAGMENTS----------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------------------->
+<th:block th:fragment="viewDataWithAudit(title, value,nameEntityField, historyMap ,showHistory)">
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="input-group">
+            <div  class="col-lg-12 view-data-title">
+                [[${title}]]
+            </div>
+            <div class="col-lg-12 view-data-key">
+                [[${{value ?: '-'}}]]
+                <th:block th:if="${historyMap != null and showHistory != null and showHistory and nameEntityField != null}">
+                    <div th:replace="this :: audit(${title}, ${nameEntityField}, ${historyMap.get(nameEntityField)}, 'viewDataWithAudit')"></div>
+                </th:block>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+<th:block th:fragment="viewDataWithAuditAndLink(title, value,nameEntityField, historyMap, showHistory, url)">
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="input-group">
+            <div  class="col-lg-12 view-data-title">
+                [[${title}]]
+            </div>
+            <div class="col-lg-12 view-data-key">
+                <a th:href="${url}" th:if="${value}">[[${value}]]</a>
+                <th:block th:unless="${value}">-</th:block>
+                <th:block th:if="${historyMap != null and showHistory != null and showHistory and nameEntityField != null}">
+                    <div th:replace="this :: audit(${title}, ${nameEntityField}, ${historyMap.get(nameEntityField)}, 'viewDataWithAudit')"></div>
+                </th:block>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+<th:block th:fragment="audit(title,nameEntityField, fieldHistoryList, fragmentName)">
+    <i th:if="${title}!=null and ${fieldHistoryList}!=null and ${nameEntityField}!=null and ${fragmentName}!=null" th:title="|Field change history '${title}'|"
+       class="fa fa-history show-popover" style="margin-left: 5px; cursor: pointer" th:id="${#strings.replace(nameEntityField,'.','-')}"  rel="popover" data-placement="auto top">
+        <div class="audit-js" style="display: none;">
+                <table class="table table-bordered table-hover table-pageable dataTable">
+                    <tbody>
+                    <tr th:each="historyOndate : ${fieldHistoryList}" class="clickable">
+                        <td class="center" th:with="authorInfo=${historyOndate.authorInfo}" th:if="${historyOndate.authorInfo != null}">
+                            <th:block th:if="${authorInfo.type.name() eq 'BACK_USER'}">
+                                <a th:href="@{'/user/'+ ${authorInfo.id}}" th:text="|${authorInfo.login} (#{user})|"></a>
+                            </th:block>
+                            <th:block th:if="${authorInfo.type.name() eq 'CLIENT_USER'}">
+                                <a th:href="@{'/borrowerAccount/'+ ${authorInfo.id}}" th:text="|${authorInfo.login} (client)|"></a>
+                            </th:block>
+                        </td>
+                        <td class="center" th:text="${#temporals.format(historyOndate.commitDate, 'dd.MM.yyyy HH:mm')}"></td>
+                        <th:block th:if="${#strings.equalsIgnoreCase(fragmentName,'viewDataWithAudit')} or ${#strings.equalsIgnoreCase(fragmentName,'viewPhoneDataWithAudit')} or ${#strings.equalsIgnoreCase(fragmentName,'viewdataWithLinkWithAudit')}">
+                            <td class="center" th:text="${historyOndate.oldValue}!=null ? ${historyOndate.oldValue} : '-'"></td>
+                        </th:block>
+                        <th:block th:if="${#strings.equalsIgnoreCase(fragmentName,'viewDecimalDataWithAudit')} or ${#strings.equalsIgnoreCase(fragmentName,'viewAmountDataWithAudit')}">
+                            <td class="center" th:text="${historyOndate.oldValue}!=null ? ${#numbers.formatDecimal(historyOndate.oldValue,1,'WHITESPACE',2,'DEFAULT')} : '-'"></td>
+                        </th:block>
+                        <th:block th:if="${#strings.equalsIgnoreCase(fragmentName,'viewEnumDataWithAudit')}">
+                            <td class="center" th:text="${historyOndate.oldValue}!=null ? ${#localization.name(historyOndate.oldValue)} : '-'"></td>
+                        </th:block>
+                        <th:block th:if="${#strings.equalsIgnoreCase(fragmentName,'viewDateDataWithAudit')}">
+                            <td class="center" th:text="${historyOndate.oldValue}!=null ? ${#temporals.format(historyOndate.oldValue, 'dd.MM.yyyy')} : '-'"></td>
+                        </th:block>
+                        <th:block th:if="${#strings.equalsIgnoreCase(fragmentName,'viewYesNoDataWithAudit')}">
+                            <td class="center" th:text="${historyOndate.oldValue}!=null ? (${historyOndate.oldValue} ? #{yes} : #{no}) : '-'"></td>
+                        </th:block>
+                    </tr>
+                    </tbody>
+                </table>
+        </div>
+    </i>
+</th:block>
+
+<th:block th:fragment="viewDecimalDataWithAudit(title, value,nameEntityField, historyMap ,showHistory)">
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="input-group">
+            <div class="col-lg-12 view-data-title">
+                [[${title}]]
+            </div>
+            <div class="col-lg-12 view-data-key">[[${{value != null ? #numbers.formatDecimal(value, 1, 'WHITESPACE', 2, 'DEFAULT') : '-'}}]]
+                <th:block th:if="${historyMap != null and nameEntityField != null and showHistory != null and showHistory}">
+                    <div th:replace="this :: audit(${title}, ${nameEntityField}, ${historyMap.get(nameEntityField)}, 'viewDecimalDataWithAudit')"></div>
+                </th:block>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+<th:block th:fragment="viewAmountDataWithAudit(title, value,nameEntityField, historyMap ,showHistory)">
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="input-group">
+            <div class="col-lg-12 view-data-title">
+                [[${title}]]
+            </div>
+            <div class="col-lg-12 view-data-key">[[${{value !=null ? #numbers.formatDecimal(value, 1, 'WHITESPACE', 2, 'DEFAULT') : '-'}}]]
+                <th:block th:if="${historyMap != null and nameEntityField != null and showHistory != null and showHistory}">
+                    <div th:replace="this :: audit(${title}, ${nameEntityField}, ${historyMap.get(nameEntityField)}, 'viewAmountDataWithAudit')"></div>
+                </th:block>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+<th:block th:fragment="viewEnumDataWithAudit(title, value, nameEntityField, historyMap, showHistory)">
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="input-group">
+            <div class="col-lg-12 view-data-title">
+                [[${title}]]
+            </div>
+            <div class="col-lg-12 view-data-key">[[${{value != null ? #localization.name(value) : '-'}}]]
+                <th:block th:if="${historyMap != null and nameEntityField != null and showHistory != null and showHistory}">
+                    <div th:replace="this :: audit(${title}, ${nameEntityField}, ${historyMap.get(nameEntityField)}, 'viewEnumDataWithAudit')"></div>
+                </th:block>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+<th:block th:fragment="viewPhoneDataWithAudit(title, value,nameEntityField, historyMap ,showHistory)">
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="input-group">
+            <div class="col-lg-12 view-data-title">
+                [[${title}]]
+            </div>
+            <div class="col-lg-12 view-data-key">
+                <span th:if="${value} !=null">
+                    [[${#phone.format(value)}]]
+                </span>
+                <span th:unless="${value} !=null " th:utext="|-|"></span>
+                <th:block th:if="${historyMap != null and nameEntityField != null and showHistory != null and showHistory}">
+                    <div th:replace="this :: audit(${title}, ${nameEntityField}, ${historyMap.get(nameEntityField)}, 'viewPhoneDataWithAudit')"></div>
+                </th:block>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+<th:block th:fragment="viewYesNoDataWithAudit(title, value, nameEntityField, historyMap, showHistory)">
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="input-group">
+            <div class="col-lg-12 view-data-title">
+               [[${title}]]
+            </div>
+            <div class="col-lg-12 view-data-key">[[${#localization.name(value ? 'yes' : 'no')}]]
+                <th:block th:if="${historyMap != null and nameEntityField != null and showHistory != null and showHistory}">
+                    <div th:replace="this :: audit(${title}, ${nameEntityField}, ${historyMap.get(nameEntityField)}, 'viewYesNoDataWithAudit')"></div>
+                </th:block>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+<th:block th:fragment="viewDateDataWithAudit(title, value, format,nameEntityField, historyMap ,showHistory)">
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="input-group">
+            <div class="col-lg-12 view-data-title">
+                [[${title}]]
+            </div>
+            <div class="col-lg-12 view-data-key" th:text="${!#strings.isEmpty(value) ? #temporals.format(value, format) : '-'}">
+                <th:block th:if="${historyMap != null and nameEntityField != null and showHistory != null and showHistory}">
+                    <div th:replace="this :: audit(${title}, ${nameEntityField}, ${historyMap.get(nameEntityField)}, 'viewDateDataWithAudit')"></div>
+                </th:block>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+<th:block th:fragment="viewdataWithLinkWithAudit(title, value, link,nameEntityField, historyMap ,showHistory)">
+    <div class="row" style="margin-bottom: 5px;">
+        <div class="input-group">
+            <div class="col-lg-12 view-data-title">
+                [[${title}]]
+            </div>
+            <div class="col-lg-12 view-data-key"><a th:href="${link}">[[${{value ?: '-'}}]]</a>
+                <th:block th:if="${historyMap != null and nameEntityField != null and showHistory != null and showHistory}">
+                    <div th:replace="this :: audit(${title}, ${nameEntityField}, ${historyMap.get(nameEntityField)}, 'viewdataWithLinkWithAudit')"></div>
+                </th:block>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+</body>
