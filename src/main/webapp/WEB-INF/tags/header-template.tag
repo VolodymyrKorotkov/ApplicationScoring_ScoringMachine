@@ -258,7 +258,7 @@
                 <div>
                     <spring:message code="company.name"/> &copy; 2022
                     <span class="fa fa-angle-double-right"></span>
-                    <a href="mailto: volodymyr.korotkov@icloud.com"><spring:message code="common.textSupportEmail"/></a>
+                    <a href="mailto: info@scoring-machine.com"><spring:message code="common.textSupportEmail"/></a>
                 </div>
             </div>
         </div>

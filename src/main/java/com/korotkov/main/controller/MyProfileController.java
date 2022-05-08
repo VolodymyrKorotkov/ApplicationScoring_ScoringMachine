@@ -151,7 +151,6 @@ public class MyProfileController implements PortalConstants {
         Map<String, Object> emailModel = new HashMap<>();
         emailModel.put("from",EMAIL_FROM);
         emailModel.put("mainUrl",MAIN_DOMAIN_URL);
-        emailModel.put("logoUrl",LOGO_URL);
         emailModel.put("subject", "Verify and Confirm new email");
         emailModel.put("to", userAccount.getTempEmailDuringChange());
         emailModel.put("verifyurl", userAccountService.generateNewLinkConfirmNewChangedEmail(userAccount));

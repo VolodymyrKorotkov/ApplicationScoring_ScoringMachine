@@ -566,27 +566,4 @@ public class CreatingNewModelController {
         modelAndView.setViewName("redirect:/creating-model/scoring-model/" + modelId + "?action=change-attribute-score");
         return modelAndView;
     }
-
-
-
-//    @Async("scoringExecutor")
-//    void createNewScoringModelAndSendEmail(MultipartFile file, UserAccount userAccount) {
-//        Map<String,Object> emailModel = new HashMap<>();
-//        emailModel.put("from",EMAIL_FROM);
-//        emailModel.put("mainUrl",MAIN_DOMAIN_URL);
-//        emailModel.put("logoUrl",LOGO_URL);
-//        emailModel.put("to", userAccount.getUsername());
-//        try{
-//            Long newScoringModelId = scoringCalculationService.createNewScoringModel(ExcelReader.readFileExcel(file),
-//                    userAccount);
-//            emailModel.put("subject", "New Scoring Model was created");
-//            emailModel.put("linkCreated", MAIN_DOMAIN_URL + "/creating-model/scoring-model/" + newScoringModelId + "?action=created-new");
-//            emailService.sendEmail("newModelWasCreated.vm", emailModel);
-//        }
-//        catch (Exception e) {
-//            emailModel.put("subject", "New Scoring Model was NOT created");
-//            emailModel.put("linkNotCreated", MAIN_DOMAIN_URL + "/creating-model/creating-new-model?action=fileException");
-//            emailService.sendEmail("newModelWasNotCreated.vm", emailModel);
-//        }
-//    }
 }

@@ -90,7 +90,7 @@ public class WebConfig implements WebMvcConfigurer {
      *  Java Mail Configuration
      */
 
-    String mailUsername = "volodymyr0korotkov@gmail.com";
+    String mailUsername = "info@scoring-machine.com";
     String mailPassword = "q1o72upvsQ";
     String mailHost = "smtp.gmail.com";
 

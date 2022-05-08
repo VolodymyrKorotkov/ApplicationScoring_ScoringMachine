@@ -86,7 +86,6 @@ public class RegistrationController implements PortalConstants {
             Map<String,Object> emailModel = new HashMap<>();
             emailModel.put("from",EMAIL_FROM);
             emailModel.put("mainUrl",MAIN_DOMAIN_URL);
-            emailModel.put("logoUrl",LOGO_URL);
             emailModel.put("subject", "Verify and Confirm email");
             emailModel.put("to", userAccountForm.getUsername());
             emailModel.put("verifyurl",userAccountService.generateNewLinkConfirmEmail(userAccountForm));

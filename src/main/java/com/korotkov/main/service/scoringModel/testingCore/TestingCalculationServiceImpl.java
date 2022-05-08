@@ -77,7 +77,6 @@ public class TestingCalculationServiceImpl implements TestingCalculationService,
             Map<String,Object> emailModel = new HashMap<>();
             emailModel.put("from", EMAIL_FROM);
             emailModel.put("mainUrl",MAIN_DOMAIN_URL);
-            emailModel.put("logoUrl",LOGO_URL);
             emailModel.put("to", userAccount.getUsername());
             try {
                 ScoringModel scoringModelActiveForTest = scoringModelDao.findActiveModelByUser(userAccount.getUsername());
