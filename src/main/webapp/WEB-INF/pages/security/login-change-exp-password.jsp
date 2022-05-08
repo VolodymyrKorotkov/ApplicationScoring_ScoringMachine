@@ -64,7 +64,7 @@
 <div class="middle-box text-center loginscreen animated fadeInDown">
     <div style="margin-top: 100px;">
 
-        <h1 class="logo-name" style="position: relative; left: -15px; top: -40px; font-size: 70px; font-weight: 600;">
+        <h1 class="logo-name" style="position: relative; left: -15px; top: -40px; font-size: 60px; font-weight: 600;">
             <spring:message code="loginChangePasswordPage.changePasswordHead"/>
         </h1>
         <c:if test="${changedPass == 'false'}">
