@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="scoringmachine">
+    <output-path>$PROJECT_DIR$/../../deploy war</output-path>
+    <root id="archive" name="ScoringOnMaven_war.war">
+      <element id="artifact" artifact-name="ScoringOnMaven:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,6 +1,5 @@
 package com.korotkov.main.service.email;
 
-import com.korotkov.main.service.email.EmailService;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;

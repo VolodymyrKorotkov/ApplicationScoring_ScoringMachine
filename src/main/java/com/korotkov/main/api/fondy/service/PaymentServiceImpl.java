@@ -77,7 +77,8 @@ public class PaymentServiceImpl implements PaymentService, PortalConstants, ApiF
         UserAccount userAccountFromDB = userAccountDao.getById(userAccount.getId());
 
         if (userRoleDao.findByUserRoleName(String.valueOf(UserRoleEnum.LEVEL_ONE)).getId()
-                .equals(userAccountFromDB.getRole().getId())) {
+                .equals(userAccountFromDB.getRole().getId()) &&
+                typePurchase.equals(String.valueOf(TypePurchaseSubscription.RENEW))) {
             return "/myprofile/mysubscription?action=ROLE_ONE";
         }
 

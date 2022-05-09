@@ -77,10 +77,6 @@ public class SubscriptionsController {
             modelAndView.setViewName("redirect:/myprofile/mysubscription?action=NOT_BUY_CURRENT_ROLE");
             return modelAndView;
         }
-        if (userRoleService.findByUserRoleName(String.valueOf(UserRoleEnum.LEVEL_ONE)).getId().equals(roleId)) {
-            modelAndView.setViewName("redirect:/myprofile/mysubscription?action=ROLE_ONE");
-            return modelAndView;
-        }
         if (!EnumUtils.isValidEnum(PeriodSubscriptionEnum.class, period)) {
             modelAndView.setViewName("redirect:/myprofile/mysubscription?action=NOT_CORRECT_PERIOD");
             return modelAndView;
