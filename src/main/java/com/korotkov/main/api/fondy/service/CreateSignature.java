@@ -43,6 +43,9 @@ public abstract class CreateSignature implements ApiFondyConstants {
         if (paymentRequest.getRequired_rectoken() != null) {
             map.put("required_rectoken", paymentRequest.getRequired_rectoken());
         }
+        if (paymentRequest.getMerchant_data() != null) {
+            map.put("merchant_data", paymentRequest.getMerchant_data());
+        }
 
         List<String> keys = new ArrayList<String>(map.keySet());
         Collections.sort(keys);

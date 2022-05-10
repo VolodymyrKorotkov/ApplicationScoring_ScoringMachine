@@ -13,6 +13,11 @@ public class PaymentRequest {
     String sender_email;
     String product_id;
     String required_rectoken;
+    String merchant_data;
+
+    public String getMerchant_data() {
+        return merchant_data;
+    }
 
     public String getOrder_id() {
         return order_id;
@@ -100,5 +105,9 @@ public class PaymentRequest {
 
     public void setSender_email(String sender_email) {
         this.sender_email = sender_email;
+    }
+
+    public void setMerchant_data(String merchant_data) {
+        this.merchant_data = merchant_data;
     }
 }

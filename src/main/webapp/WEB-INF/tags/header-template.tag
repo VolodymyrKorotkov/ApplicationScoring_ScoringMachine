@@ -92,6 +92,15 @@
     <!--    <script th:src="@{/js/bpmn-viewer.production.min.js}"></script>-->
 <%--    <script src="${pageContext.request.contextPath}/res/js/bpmn-navigated-viewer.min.js"></script>--%>
     <script src="${pageContext.request.contextPath}/res/js/footable.min.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0YNWZ6W90S"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-0YNWZ6W90S');
+    </script>
 </head>
 <body>
 <div id = "wrapper">

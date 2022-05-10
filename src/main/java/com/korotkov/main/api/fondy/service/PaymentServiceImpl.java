@@ -128,6 +128,7 @@ public class PaymentServiceImpl implements PaymentService, PortalConstants, ApiF
 
         PaymentRequest paymentRequest = new PaymentRequest();
         paymentRequest.setOrder_id(String.valueOf(commonPaymentModelSaved.getId()) + "-ScoringMachine");
+        paymentRequest.setMerchant_data(String.valueOf(commonPaymentModelSaved.getId()));
         paymentRequest.setMerchant_id(commonPaymentModelSaved.getMerchantId());
         paymentRequest.setOrder_desc(commonPaymentModelSaved.getOrderDescription());
         paymentRequest.setAmount((int) (commonPaymentModelSaved.getAmount() * 100));
@@ -153,6 +154,7 @@ public class PaymentServiceImpl implements PaymentService, PortalConstants, ApiF
             paymentRequestJsonObject.put("currency",paymentRequest.getCurrency());
             paymentRequestJsonObject.put("response_url",paymentRequest.getResponse_url());
             paymentRequestJsonObject.put("server_callback_url",paymentRequest.getServer_callback_url());
+            paymentRequestJsonObject.put("merchant_data", paymentRequest.getMerchant_data());
             paymentRequestJsonObject.put("sender_email",paymentRequest.getSender_email());
             paymentRequestJsonObject.put("product_id",paymentRequest.getProduct_id());
             paymentRequestJsonObject.put("required_rectoken",paymentRequest.getRequired_rectoken());

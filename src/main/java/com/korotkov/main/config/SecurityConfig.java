@@ -1,5 +1,6 @@
 package com.korotkov.main.config;
 
+import com.korotkov.main.api.fondy.config.ApiFondyConstants;
 import com.korotkov.main.security.MappedExceptionAuthFailureHandler;
 import com.korotkov.main.enums.UserRoleEnum;
 import com.korotkov.main.service.userAccount.UserAccountService;
@@ -20,7 +21,7 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter implements ApiFondyConstants {
 
     UserAccountService userAccountService;
 
@@ -59,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/security/**","/security/verification/**","/security/login/**","/security/login?error=true",
                         "/security/login/change-exp-password","/security/login?badcredentials=true",
                         "/security/login?locked=true","/security/login/not-confirmed-email","/res/**",
-                        "/security/login").permitAll()
+                        "/security/login", SERVER_CALLBACK_URL, RESPONSE_URL_POST).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().permitAll()
