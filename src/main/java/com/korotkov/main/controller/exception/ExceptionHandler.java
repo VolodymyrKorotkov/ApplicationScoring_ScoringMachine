@@ -25,7 +25,7 @@ public class ExceptionHandler implements HandlerExceptionResolver {
                                          Object o, Exception e){
         logger.error("Error log: ", e);
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("error/500");
+        modelAndView.setViewName("500");
         return modelAndView;
     }
 
@@ -34,7 +34,7 @@ public class ExceptionHandler implements HandlerExceptionResolver {
         public ModelAndView handleNoHandlerFoundException(final NoHandlerFoundException exception){
         logger.error("Error log: ", exception);
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("error/404");
+        modelAndView.setViewName("404");
         return modelAndView;
         }
 
@@ -42,7 +42,7 @@ public class ExceptionHandler implements HandlerExceptionResolver {
     @org.springframework.web.bind.annotation.ExceptionHandler(AccessDeniedException.class)
     public ModelAndView handleAccessDeniedException(final AccessDeniedException exception){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("error/403");
+        modelAndView.setViewName("403");
         return modelAndView;
     }
 
@@ -51,7 +51,7 @@ public class ExceptionHandler implements HandlerExceptionResolver {
     public ModelAndView handleAnyException(final Exception exception){
         logger.error("Error log: ", exception);
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("error/500");
+        modelAndView.setViewName("500");
         return modelAndView;
     }
 
@@ -59,7 +59,7 @@ public class ExceptionHandler implements HandlerExceptionResolver {
     @org.springframework.web.bind.annotation.ExceptionHandler({DataIntegrityViolationException.class})
     public ModelAndView handleUnexpectedMvcExceptions(Exception exception){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("error/406");
+        modelAndView.setViewName("406");
         return modelAndView;
     }
 }

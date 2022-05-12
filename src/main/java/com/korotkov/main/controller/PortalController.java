@@ -27,28 +27,28 @@ public class PortalController {
     @RequestMapping(value = "/error/403", method = RequestMethod.GET)
     public ModelAndView error403() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("error/403");
+        modelAndView.setViewName("403");
         return modelAndView;
     }
 
     @RequestMapping(value = "/error/404", method = RequestMethod.GET)
     public ModelAndView error404() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("error/404");
+        modelAndView.setViewName("404");
         return modelAndView;
     }
 
     @RequestMapping(value = "/error/406", method = RequestMethod.GET)
     public ModelAndView error406() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("error/406");
+        modelAndView.setViewName("406");
         return modelAndView;
     }
 
     @RequestMapping(value = "/error/500", method = RequestMethod.GET)
     public ModelAndView error500() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("error/500");
+        modelAndView.setViewName("500");
         return modelAndView;
     }
 

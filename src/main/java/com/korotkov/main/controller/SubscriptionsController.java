@@ -63,8 +63,13 @@ public class SubscriptionsController {
             modelAndView.setViewName("redirect:/myprofile/mysubscription?action=NOT_CORRECT_PERIOD");
             return modelAndView;
         }
-        modelAndView.setViewName("redirect:" + paymentService.createNewPaymentRequestAndRedirect(currentRoleId,
-                userAccount, period, String.valueOf(TypePurchaseSubscription.RENEW)));
+        //заглушка
+        modelAndView.setViewName("soonWeStart");
+
+
+        // дальше сервис именно для интеграции с Fondy
+//        modelAndView.setViewName("redirect:" + paymentService.createNewPaymentRequestAndRedirect(currentRoleId,
+//                userAccount, period, String.valueOf(TypePurchaseSubscription.RENEW)));
         return modelAndView;
     }
 
@@ -81,8 +86,12 @@ public class SubscriptionsController {
             modelAndView.setViewName("redirect:/myprofile/mysubscription?action=NOT_CORRECT_PERIOD");
             return modelAndView;
         }
-        modelAndView.setViewName("redirect:" + paymentService.createNewPaymentRequestAndRedirect(roleId, userAccount,
-                period, String.valueOf(TypePurchaseSubscription.PURCHASE)));
+        //заглушка
+        modelAndView.setViewName("soonWeStart");
+
+        // дальше сервис именно для интеграции с Fondy
+//        modelAndView.setViewName("redirect:" + paymentService.createNewPaymentRequestAndRedirect(roleId, userAccount,
+//                period, String.valueOf(TypePurchaseSubscription.PURCHASE)));
         return modelAndView;
     }
 
