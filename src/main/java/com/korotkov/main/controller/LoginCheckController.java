@@ -99,7 +99,7 @@ public class LoginCheckController implements PortalConstants {
         Map<String,Object> emailModel = new HashMap<>();
         emailModel.put("from",EMAIL_FROM);
         emailModel.put("mainUrl",MAIN_DOMAIN_URL);
-        emailModel.put("subject", "Confirm New Password");
+        emailModel.put("subject", "Reset Password");
         emailModel.put("to", userAccountForm.getUsername());
         emailModel.put("newPassword",userAccountService.resetPassword(userAccountForm));
 

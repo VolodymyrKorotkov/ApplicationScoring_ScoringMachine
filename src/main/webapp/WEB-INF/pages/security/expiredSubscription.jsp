@@ -61,7 +61,7 @@
             </ul>
             <ul class="nav navbar-header navbar-top-links navbar-right" style="margin-right: 50px;">
                 <li class="hidden-xs">
-                    <a href="<c:url value="https://google.com"/>" target="_blank">
+                    <a href="<spring:message code="common.urlToLandingPage"/>" target="_blank">
                         <i class="fa fa-link"></i>
                         <spring:message code="common.backToLandingPage"/>
                     </a>

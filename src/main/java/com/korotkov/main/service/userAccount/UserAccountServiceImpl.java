@@ -212,6 +212,7 @@ public class UserAccountServiceImpl implements UserAccountService, PortalConstan
         }
         userAccountFromDB.setLastModifiedAt(LocalDateTime.now(ZoneId.of(TIME_ZONE)));
         userAccountFromDB.setTempPasswordDuringChange(bCryptPasswordEncoder.encode(userAccount.getNewPassword()));
+        userAccountDao.update(userAccountFromDB);
         return true;
     }
 

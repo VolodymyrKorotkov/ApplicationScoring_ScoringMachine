@@ -16,7 +16,7 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
         AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
         rootContext.register(HibernateConfig.class, SecurityConfig.class);
 
-        servletContext.addListener(new ContextLoaderListener(rootContext));
+//        servletContext.addListener(new ContextLoaderListener(rootContext));
         servletContext.addListener(new SessionListener());
         AnnotationConfigWebApplicationContext servletAppContext = new AnnotationConfigWebApplicationContext();
         servletAppContext.register(WebConfig.class);

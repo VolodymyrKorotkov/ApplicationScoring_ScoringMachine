@@ -178,7 +178,7 @@ public class CreatingNewModelController {
         return modelAndView;
     }
 
-    @PreAuthorize("hasAuthority(T(com.korotkov.main.enums.UserRoleEnum).LEVEL_FIVE)")
+    @PreAuthorize("hasAnyAuthority(T(com.korotkov.main.enums.UserRoleEnum).LEVEL_FIVE)")
     @RequestMapping(value = "/creating-model/scoring-model-advanced-settings/edit", method = RequestMethod.GET)
     public ModelAndView scoringModelAdvancedSettingsEditPage(@AuthenticationPrincipal UserAccount userAccount){
         ModelAndView modelAndView = new ModelAndView();
@@ -220,7 +220,7 @@ public class CreatingNewModelController {
         return modelAndView;
     }
 
-    @PreAuthorize("hasAuthority(T(com.korotkov.main.enums.UserRoleEnum).LEVEL_FIVE)")
+    @PreAuthorize("hasAnyAuthority(T(com.korotkov.main.enums.UserRoleEnum).LEVEL_FIVE)")
     @RequestMapping(value = "/creating-model/scoring-model-advanced-settings/edit", method = RequestMethod.POST)
     public ModelAndView scoringModelAdvancedSettingsEditPost(@AuthenticationPrincipal UserAccount userAccount,
                                                              @ModelAttribute("scoringSettingsModel")
@@ -323,7 +323,7 @@ public class CreatingNewModelController {
         return modelAndView;
     }
 
-    @PreAuthorize("hasAuthority(T(com.korotkov.main.enums.UserRoleEnum).LEVEL_FIVE)")
+    @PreAuthorize("hasAnyAuthority(T(com.korotkov.main.enums.UserRoleEnum).LEVEL_FIVE)")
     @RequestMapping(value = "/creating-model/scoring-model-advanced-settings/restore-default-settings", method = RequestMethod.GET)
     public ModelAndView scoringModelAdvancedSettingsRestoreDefaultSettings(@AuthenticationPrincipal UserAccount userAccount){
         ModelAndView modelAndView = new ModelAndView();
@@ -377,7 +377,7 @@ public class CreatingNewModelController {
         return modelAndView;
     }
 
-    @PreAuthorize("hasAuthority(T(com.korotkov.main.enums.UserRoleEnum).LEVEL_FIVE)")
+    @PreAuthorize("hasAnyAuthority(T(com.korotkov.main.enums.UserRoleEnum).LEVEL_FIVE)")
     @RequestMapping(value = "/creating-model/scoring-model/{modelId}/export-to-excel")
     public ModelAndView scoringModelExportToExcel(@AuthenticationPrincipal UserAccount userAccount,
                                                   @PathVariable(value = "modelId") Long modelId){

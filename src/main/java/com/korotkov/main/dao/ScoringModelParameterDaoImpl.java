@@ -71,10 +71,11 @@ public class ScoringModelParameterDaoImpl implements ScoringModelParameterDao{
     @Override
     public boolean isAsScoringAttributeWithWholeName(Long scoringModelId, String attributeName){
         Session session = sessionFactory.getCurrentSession();
-        return !session.createQuery("select smp from ScoringModelParameter smp where smp.scoringModel.id = :scoringModelId and smp.nameParameter = :attributeName and smp.total <> :booleanTotal")
+        return !session.createQuery("select smp from ScoringModelParameter smp where smp.scoringModel.id = :scoringModelId and smp.nameParameter = :attributeName and smp.total <> :booleanTotal and smp.recommended = :booleanRecommend")
                 .setParameter("scoringModelId", scoringModelId)
                 .setParameter("attributeName", attributeName)
                 .setParameter("booleanTotal", true)
+                .setParameter("booleanRecommend", true)
                 .list().isEmpty();
     }
 

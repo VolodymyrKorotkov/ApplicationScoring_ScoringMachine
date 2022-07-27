@@ -263,7 +263,7 @@ public class TestingScoringModelController implements PortalConstants {
         return modelAndView;
     }
 
-    @PreAuthorize("hasAuthority(T(com.korotkov.main.enums.UserRoleEnum).LEVEL_FIVE)")
+    @PreAuthorize("hasAnyAuthority(T(com.korotkov.main.enums.UserRoleEnum).LEVEL_FIVE)")
     @RequestMapping(value = "/testing-model/test-scoring-model/{testModelId}/export-to-excel", method = RequestMethod.GET)
     public ModelAndView testScoringModelExportToExcel(@AuthenticationPrincipal UserAccount userAccount,
                                                       @PathVariable(value = "testModelId") Long testModelId){
