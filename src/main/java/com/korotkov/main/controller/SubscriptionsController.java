@@ -64,12 +64,12 @@ public class SubscriptionsController {
             return modelAndView;
         }
         //заглушка
-        modelAndView.setViewName("soonWeStart");
+//        modelAndView.setViewName("soonWeStart");
 
 
         // дальше сервис именно для интеграции с Fondy
-//        modelAndView.setViewName("redirect:" + paymentService.createNewPaymentRequestAndRedirect(currentRoleId,
-//                userAccount, period, String.valueOf(TypePurchaseSubscription.RENEW)));
+        modelAndView.setViewName("redirect:" + paymentService.createNewPaymentRequestAndRedirect(currentRoleId,
+                userAccount, period, String.valueOf(TypePurchaseSubscription.RENEW)));
         return modelAndView;
     }
 
@@ -87,11 +87,11 @@ public class SubscriptionsController {
             return modelAndView;
         }
         //заглушка
-        modelAndView.setViewName("soonWeStart");
+//        modelAndView.setViewName("soonWeStart");
 
         // дальше сервис именно для интеграции с Fondy
-//        modelAndView.setViewName("redirect:" + paymentService.createNewPaymentRequestAndRedirect(roleId, userAccount,
-//                period, String.valueOf(TypePurchaseSubscription.PURCHASE)));
+        modelAndView.setViewName("redirect:" + paymentService.createNewPaymentRequestAndRedirect(roleId, userAccount,
+                period, String.valueOf(TypePurchaseSubscription.PURCHASE)));
         return modelAndView;
     }
 

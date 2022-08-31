@@ -1,8 +1,8 @@
 package com.korotkov.main.api.fondy.config;
 
 public interface ApiFondyConstants {
-    public static final int MERCHANT_ID = 1396424;
-    public static final String PASSWORD = "test";
+    public static final int MERCHANT_ID = 1507921;
+    public static final String PASSWORD = "9lyE762jOOSW7QeqwUitxTgsd0jIAQVh";
     public static final String CURRENCY = "USD";
     public static final String REQUIRED_RECTOKEN = "Y";
     public static final String RESPONSE_URL_POST = "/api/v1/fondy/portal/response";

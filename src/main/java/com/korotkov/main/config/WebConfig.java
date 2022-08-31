@@ -29,6 +29,8 @@ import org.springframework.web.servlet.view.XmlViewResolver;
 import java.util.Locale;
 import java.util.Properties;
 
+import static com.korotkov.main.service.email.EmailConfig.*;
+
 @Configuration
 @EnableWebMvc
 @EnableAsync
@@ -90,15 +92,15 @@ public class WebConfig implements WebMvcConfigurer {
      *  Java Mail Configuration
      */
 
-    String mailUsername = "info@scoring-machine.com";
-    String mailPassword = "q1o72upvsQ";
+    // String mailUsername = "info@scoring-machine.com";
+    // String mailPassword = "q1o72upvsQ";
     String mailHost = "smtp.gmail.com";
 
     @Bean(name = "mailSender")
     public JavaMailSenderImpl getJavaMailSender(){
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
-        javaMailSender.setUsername(mailUsername);
-        javaMailSender.setPassword(mailPassword);
+        javaMailSender.setUsername(EMAIL_USERNAME);
+        javaMailSender.setPassword(EMAIL_PASSWORD);
         javaMailSender.setPort(587);
 
         Properties javaMailProperties = new Properties();
@@ -113,6 +115,87 @@ public class WebConfig implements WebMvcConfigurer {
         javaMailSender.setJavaMailProperties(javaMailProperties);
         return javaMailSender;
     }
+
+    @Bean(name = "mailSender01")
+    public JavaMailSenderImpl getJavaMailSender01(){
+        JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
+        javaMailSender.setUsername(EMAIL_USERNAME_01);
+        javaMailSender.setPassword(EMAIL_PASSWORD_01);
+        javaMailSender.setPort(587);
+
+        Properties javaMailProperties = new Properties();
+        javaMailProperties.put("mail.smtp.auth", true);
+        javaMailProperties.put("mail.smtp.starttls.enable", true);
+        javaMailProperties.put("mail.smtp.starttls.required",true);
+        javaMailProperties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        javaMailProperties.put("mail.smtp.host",mailHost);
+        javaMailProperties.put("mail.smtp.ssl.protocols", "TLSv1.2");
+//        javaMailProperties.put("mail.smtp.port", "587");
+
+        javaMailSender.setJavaMailProperties(javaMailProperties);
+        return javaMailSender;
+    }
+
+    @Bean(name = "mailSender02")
+    public JavaMailSenderImpl getJavaMailSender02(){
+        JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
+        javaMailSender.setUsername(EMAIL_USERNAME_02);
+        javaMailSender.setPassword(EMAIL_PASSWORD_02);
+        javaMailSender.setPort(587);
+
+        Properties javaMailProperties = new Properties();
+        javaMailProperties.put("mail.smtp.auth", true);
+        javaMailProperties.put("mail.smtp.starttls.enable", true);
+        javaMailProperties.put("mail.smtp.starttls.required",true);
+        javaMailProperties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        javaMailProperties.put("mail.smtp.host",mailHost);
+        javaMailProperties.put("mail.smtp.ssl.protocols", "TLSv1.2");
+//        javaMailProperties.put("mail.smtp.port", "587");
+
+        javaMailSender.setJavaMailProperties(javaMailProperties);
+        return javaMailSender;
+    }
+
+    @Bean(name = "mailSender03")
+    public JavaMailSenderImpl getJavaMailSender03(){
+        JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
+        javaMailSender.setUsername(EMAIL_USERNAME_03);
+        javaMailSender.setPassword(EMAIL_PASSWORD_03);
+        javaMailSender.setPort(587);
+
+        Properties javaMailProperties = new Properties();
+        javaMailProperties.put("mail.smtp.auth", true);
+        javaMailProperties.put("mail.smtp.starttls.enable", true);
+        javaMailProperties.put("mail.smtp.starttls.required",true);
+        javaMailProperties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        javaMailProperties.put("mail.smtp.host",mailHost);
+        javaMailProperties.put("mail.smtp.ssl.protocols", "TLSv1.2");
+//        javaMailProperties.put("mail.smtp.port", "587");
+
+        javaMailSender.setJavaMailProperties(javaMailProperties);
+        return javaMailSender;
+    }
+
+    @Bean(name = "mailSender04")
+    public JavaMailSenderImpl getJavaMailSender04(){
+        JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
+        javaMailSender.setUsername(EMAIL_USERNAME_04);
+        javaMailSender.setPassword(EMAIL_PASSWORD_04);
+        javaMailSender.setPort(587);
+
+        Properties javaMailProperties = new Properties();
+        javaMailProperties.put("mail.smtp.auth", true);
+        javaMailProperties.put("mail.smtp.starttls.enable", true);
+        javaMailProperties.put("mail.smtp.starttls.required",true);
+        javaMailProperties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        javaMailProperties.put("mail.smtp.host",mailHost);
+        javaMailProperties.put("mail.smtp.ssl.protocols", "TLSv1.2");
+//        javaMailProperties.put("mail.smtp.port", "587");
+
+        javaMailSender.setJavaMailProperties(javaMailProperties);
+        return javaMailSender;
+    }
+
 
     @Bean(name = "velocityEngine")
     public VelocityEngineFactoryBean getVelocityEngineFactoryBean(){
