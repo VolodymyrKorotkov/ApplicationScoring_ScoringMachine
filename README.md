@@ -5,6 +5,8 @@ This is my first Java application, which I once wrote for myself and decided to 
 
 Spring, Java, JSP, PostgreSQL, Hibernate were used.
 
+How you can use as user this applications read, please, file "instructions".
+
 To use the application, you need:
 
 - in the public interface PortalConstants, you can change the time zone, the home url, which is used to generate links to email templates.
@@ -312,6 +314,8 @@ ________________________________________________________________________________
 Для создания скоринга вам необходимо подготовить данные и загрузить файл xlsx в систему (построение модели можно регулировать настройками), дальше по итогу создания модели или ее теста вы получите имейл-уведомление.
 
 Использовались Spring, Java, JSP, PostgreSQL, Hibernate.
+
+How you can use as user this applications read, please, file "instructions".
 
 Для использования приложения, нужно:
 
