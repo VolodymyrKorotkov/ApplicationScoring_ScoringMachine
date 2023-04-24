@@ -1,0 +1,471 @@
+Instructions about application scoring:
+
+1. What is scoring:
+In many businesses and areas, it is very important to assess the likelihood of an event occurring. Each direction has its own event. For credit institutions and banks - the probability of default (non-payment of the loan). For marketing - the probability of a client's response after an advertising campaign, a certain contact with the client. For collection - the probability of fulfillment of obligations after a certain action by the collector for a particular debtor.
+
+It is necessary to determine in advance the probability of an event occurring in order to minimize risks and reduce unjustified expenses.
+
+For credit institutions, it is important to determine whether to issue a loan to a client at his request, because a credit institution earns on the interest received from the loan only if the client repays this loan without unnecessary additional costs. Accordingly, it is important to determine in advance the probability of default by the client.
+
+For marketing directions and for collection activities, this is important in order to minimize costs in order to achieve the goal. After all, if you know in advance that a higher probability of a response from a particular client will be through email communication, then you don’t need to send SMS notifications or call him. Thus, it is possible for some clients to use cheaper communication channels with the same effect.
+
+The best way to determine the likelihood of an event occurring is scoring.
+
+The scoring system got its name from the English word "score". Attributes are used to determine the probability of the target event occurring and, depending on the value of the attribute, a certain number of points is assigned to it. When we know the values for all attributes (they can be both negative and positive), we can sum up the total number of points. It is this general assessment that is the probability of the target event occurring.
+
+It seems that everything is quite simple, but in order to create the necessary scorecards and understand which value of which attribute how many points to assign, it is necessary to carry out a number of mathematical calculations on historical data.
+
+Attributes can be:
+- personal data filled in by the client (On employment, social status, type of activity, age, gender, number of children, etc.);
+- data that you received from partners or from your system (the number of transactions by a client in the past with you or with competitors, the speed of filling out an application or questionnaire, the frequency of calls to the company and the purposes of the calls, the presence of a client in social networks or the activity of using them, GEO and others);
+
+To be more precise, almost any information that you know or can learn about the client before your target action can act as attributes.
+
+Scoring is most often used as:
+
+Risky (risk check):
+- Application (the goal is the issuance of the product, according to the static data of the client's application and data on the client itself);
+- Behavioral (goal - issuance of the product, according to the behavior of the client, the frequency of calls, types of calls, the activity of using products, etc.);
+- Collection (as the compatibility of the two previous ones, but the purpose of scoring is to select activities with the client for less costly and more effective collection);
+- Fraud (the goal is to find the probability that the client is a fraudster).
+Marketing:
+- Response (what is the probability of a response to marketing activity);
+- Attrition (what is the probability of a customer churn, which customer will soon leave the service in the company);
+- Utilization (the goal is the maximum utilization of the company's products, their use and what actions of which customers will be motivated to do this);
+- Income (obtaining the highest profitability from which clients).
+Initial data preparation
+The construction of scoring maps is based on statistical models. To build them, there must be sufficient and high-quality information about customers. The quality of the initial statistical data for building a statistical model determines its forecasting accuracy and the success of the development of the scoring system as a whole.
+
+The development of a scoring model is based on the analysis of previous experience. A sufficient amount of information is one of the main prerequisites for building a model. The amount of data may vary depending on specific models, but in general the data should satisfy the requirements of statistical significance and randomness.
+
+Ideally, scoring models should be applied to the same products, market sector, and economic situation that formed the basis of the past experience data. For example, information on consumer loans cannot be adequately used in the development of a scorecard for car loans. This requirement specifies the period for which data is collected. The historical period of data for building a model is usually determined by the type of scoring and the type of product, the type of client. This means that if your customers are segmented, it is important to create separate scorecards not only for different products (loan, credit card, car loan, early debt collection, late debt collection, email advertising, sms advertising, telemarketing use), but and for different customer segments. The simplest client segmentation: a new client and a repeat client who has already used the services of the company. For them, completely different attributes may be important.
+
+Therefore, the use of several scoring cards and models often gives a much better result.
+
+It is best to take data as fresh as possible, but where the target event has already been committed. For example, you have issued a loan and your goal is that the client does not go into delay for more than 1 month. Then it is best to take data for the longest possible period, but only for the period where all customers, in theory, could either close the loan or go into arrears. It is desirable to avoid ambiguities as much as possible. Or you do SMS-mailing to clients, where the target task is to get the necessary activity from them during the week. Then you can use these clients for analysis at least after a week, not earlier.
+Data about a certain type of customer must be excluded from the source infobase. These may be atypical clients - scammers, employees, VIP clients, deceased clients, i.e. all those customers who are knocked out of the mass with something bright. For each such type, if necessary, it is better to build a separate scoring model.
+Definition of dependent variable
+The choice of the dependent variable is determined by the purpose of constructing the scoring model. For example, fact of the expire, response to activity from a specific channel, purchase of additional goods.
+At the stage of determining the dependent variable, customers are divided into three groups: "bad", "good" and "uncertain". Bad - those where the desired goal was not achieved. The good ones are those where the goal was achieved. Uncertain - those where the goal could not yet be achieved or there is little data on the data of clients, for example, an incomplete questionnaire with a lack of many attributes or the inability to calculate most of the data, etc.
+When building a scorecard, only clients defined as "bad" and "good" are used. Undefined clients are excluded from the source data to create the model.
+Formation of training and test lists
+The information data available for building a scoring model is often referred to as a historical sample. The historical sample should reflect the target population of customers as closely as possible, i.e. be representative. So after preparing this customer data, breaking it down into different segments by customer type, region, or product, you can move on to the next step.
+
+To check the adequacy and accuracy of the scoring model prediction at the stage of its development, the historical sample must be divided into two groups:
+- training sample - observations, according to which the model will be directly built;
+- test or control sample - observations from which the value of the dependent variable will be known, but they will not participate in the construction of the model, but will be used to test the accuracy of the model prediction.
+
+The training and control samples should be formed on the basis of a random selection mechanism, usually in the ratio of 70–80% and 30–20%, respectively, of the initial volume of the historical sample.
+Checking the reliability of the model consists in its application and comparison of the results on the control and test samples. The model should give correct predictions not only on the training set, but also in practice when it is applied. Typically, a two-sample model generalization strategy is used. Similar accuracy scores obtained on the training and test sets are a sign that in practice the scoring model will work in much the same way.
+
+If the quality of the model is insufficient, then you can change the attributes, attribute weights, or coefficient weights for the final score to change the model and rerun the test.
+Determination of the list size
+It is possible to build a model on repeating dependencies. Accordingly, the larger the sample, the better. In practice, a sample size of at least 5,000–10,000 clients is recommended for model building. But there is a practice of building a model for 1,000 clients. In any case, try to use the maximum number of clients, but on the condition of dividing into the necessary segments and excluding those clients for which the data is not complete, as described above.
+
+A 50/50 ratio of good to bad is best, but this is usually not possible. In any case, we do not recommend specifically making such a ratio for the sample. It is better to take everyone for a certain period, even if the ratio of bad ones to good ones is an order of magnitude smaller.
+
+After preparing this data, you can find the necessary dependencies and build a scoring model, thereby significantly improving the achievement of desired results with lower costs.
+
+Our “Scoring Machine” system will help you with this, thanks to which you can build a model simply by loading your historical data into it. And it's just as easy to test it. And if the quality of the model does not suit you, then you can change the coefficients for building the model and build it again with other coefficients in the algorithm. If you wish, you can change individual attributes in the finished model in the same way in manual mode.
+
+Enter the portal to the “Scoring Machine” system and build a scoring model simply and easily!
+
+__________________________________________________________________________________________________________________________________________________________
+
+2. Scoring Machine system. General acquaintance
+
+The “Scoring Machine” system is an application with which you can easily build a scoring model, if necessary, manually edit it, and also easily conduct testing. Using the application does not require specific knowledge.
+
+Everything you need you can get by reading the instructions. This means that if you have never built a scoring model, then with the help of the “Scoring Machine” you can still build a high-quality model and use it.
+
+And if you have at least minimal knowledge of building scoring models, you know what WoE is and how to calculate it, then “Scoring Machine” when using advanced settings will become your indispensable companion, which will calculate all the necessary data in a short time simply from the uploaded file with data for analysis. The system makes it possible to edit the final attributes and immediately carry out testing on any of the saved models, due to which the time for building or calibrating the scoring model will be reduced tenfold.
+
+Below you can find the main blocks of the application.
+
+Until a successful login (login/registration/password recovery process, etc.), the application will look like this:
+Illustration
+Where:
+1 - This is a platform language change. Currently 3 languages are available (English, Ukrainian, Russian).
+
+2 - This is a transition to the general information site from the portal. In case you are looking for help or contact information.
+
+3 - Form for filling and sending data. For example, to log in the site:
+- account (your email to which you registered);
+- password;
+For other processes, the forms have a different set of data.
+
+4 - Block with additional links to go to other pages (login, registration, password recovery form).
+
+After logging in, there will be several blocks for your attention. Access to these blocks and their individual functions depends on the level of your subscription. Therefore, if you do not have access to some block or function, then first of all check your subscription level, in the description for each subscription you will find information that is possible if you have one or another subscription. The best option is level 5. All features and functions are available, and when you purchase a subscription for several months at once, you also get a good discount.
+Illustration
+1 - Button to expand or narrow the menu on the left.
+
+2 - Change the platform language.
+
+3 - Log out as an authorized user.
+
+4 - Email of support in case of questions.
+
+5 - Go to the main page - Welcome instructions. In this section, you can view the content and main links on using the platform to quickly navigate to the desired page with instructions on how to use the platform at one stage or another.
+
+6 - Block "My profile". This block has various sections where you can edit your profile and data in it, change your password, change your email address, view possible subscription options and purchase or renew an existing one, view your payment history.
+More details about the block "My profile" here.
+
+7 - Block "Creating a model". Here it is possible to build a new model, configure the construction of a scoring model with general or advanced settings, view ready-made models, edit them, export the finished model data to an excel file.
+More details about the block "Creating a model" here.
+
+8 - Block "Testing the scoring model". Here it is possible to upload a data file and create a test for the activated scoring model. View tests for all models that are in the system, add a name and description, and export test data to an excel file.
+More details about the "Testing the scoring model" block here.
+
+Familiarize yourself with the possibilities of using each unit and use the system to its full potential. Building a forecast and making decisions in your processes will become easy and affordable with "Scoring Machine".
+
+__________________________________________________________________________________________________________________________________________________________
+
+3. Scoring Machine system. My profile
+
+The My Profile block contains three sections:
+- My profile;
+- My subscription;
+- Payment history.
+Illustration
+In the "My Profile" section, with "Actions", you can edit your profile by setting your First Name, Last Name, Date of Birth.
+Illustration
+Also with the actions you can start changing the email / username. And change it with hints.
+
+Pay attention to the password expiration date. Based on the current security policy, the password has its own validity period. You can wait until the password expires, and the system will force you to change the password at the entrance, or you can periodically change the password yourself.
+
+Password requirements: minimum 8 characters, minimum 1 lowercase letter, 1 uppercase letter, 1 number, 1 special character.
+
+In the "My Subscription" section, you can view your current subscription and its expiration date, as well as see other subscription options and, if desired, purchase another subscription.
+Illustration
+Subscription "Level 1" is provided immediately upon registration and provides very limited platform usage. It has no expiration date. But first of all, this subscription is intended for getting to know the platform, filling out your profile and giving you the opportunity to purchase any other subscription.
+
+To show or hide subscription information, click on the block itself.
+Illustration
+When a subscription is disclosed, it contains additional information about the features and rights that come with that subscription. And also in the upper right corner there is an opportunity to renew the subscription if the subscription is valid or buy a subscription if you are viewing a non-current subscription.
+
+If the subscription is renewed, then the term that is paid is added to the current end date of the current subscription. This means that if the subscription is already valid for a year, and it is renewed for another year, then the purchase does not overwrite the subscription period, but adds another year to the subscription end date.
+
+If a new subscription is purchased, the previous subscription is completely overwritten. This means that the period for which a subscription is purchased, regardless of the parameters of the current subscription, will be set from the current date / from the date of purchase of a new subscription.
+
+In the "Payment History" section, you can view the history of all payments that have been made on the platform.
+
+_________________________________________________________________________________________________________________________________________________________
+
+4. Scoring Machine system. Creating a scoring model
+
+The block "Creating a model" contains sections:
+- Creation of a new model;
+- List of models;
+- Settings for creating a model;
+- Advanced settings for creating a model.
+Illustration
+In the "Settings for creating a model" section, you can configure the parameters for building a scoring model.
+Illustration
+You can specify how exactly in the file that will be loaded to create the scoring model and test, “Good” and “Bad” results will be marked in the first column of the file. Or you can leave the standard names for good and bad, but then this is how they should be named in the files.
+
+You can also select the quality level of the model. The higher the level, the better the model will be! But! If your list of data has weak dependencies, you need to select the appropriate model quality level. I recommend starting with level 2, which is the default. Tier 2 and Tier 3 are considered the best for most cases and lists. But you can try to build different models, with different settings, and after testing, choose the best option for yourself.
+
+The quality level affects how influential attributes the system will look for when creating a model, which means that the higher the quality level of the model is, the more significant attributes will be searched for. But, if such attributes are not found or there are few of them, then the model will not be of high quality. Therefore, it is important to match the quality level of the model to the quality of the list of data itself. Again, I recommend starting at level 2 or 3.
+
+Usually, to create a high-quality model, it is enough to find from 8 to 12 attributes. If in the end there are more than 20 attributes, then you can safely try to rebuild the model, but with a higher model quality in the settings.
+
+To change the settings or restore the default, you can use the "Actions" button in the upper right corner.
+
+In the "Advanced settings for creating a model" section, there is also the possibility of advanced settings for users with a Level 5 subscription, where it is possible to fine-tune the algorithm for selecting influential attributes for creating a model.
+You can read more about advanced settings here.
+
+In the "Creating a new model" section, the process of creating a scoring model takes place.
+Illustration
+It is important to note that each subscription has its own limits on the number of simultaneously saved models. Therefore, if this limit is exhausted at the beginning of building a new model, the system will independently delete the model and all tests for it, which was created earlier than the others. Therefore, in order to avoid such automatic deletion of the model, it is better to control the number of saved models yourself within the limit of the current subscription or change the subscription. You can control by removing unnecessary models yourself. When deleting a model, all tests for it (if any) will also be deleted.
+
+To create a model, you need to select a file with data for analysis with the extension .xls or .xlsx on your computer and upload it to the Scoring Machine system. Then click on "Build New Model". The system will make a series of checks on the file, if any inconsistencies in the requirements for the file are found during the first observation, an error will be displayed. After checking the file for a short time, the Scoring Machine will start analyzing the file and display a notification.
+
+The duration of model creation depends on the amount of data to be analyzed. The larger the data file, the longer the system will analyze and build the model. This means that if the same file is analyzed several times already, but with different settings for creating a scoring model, then you can safely delete unnecessary columns, for example, those that, after the first analyzes, showed little information value for the model.
+
+A very important process before building a model is to prepare the file correctly so that the system can analyze it better.
+All file requirements can be found here.
+
+After the Scoring Machine finishes creating a model, it will immediately be displayed in the general list of models, and an email will be sent to the user's email informing them that the model creation process has been completed. If the model is not created for some reason (for example, errors in the file, the presence of empty cells where they should not be), then an e-mail will also be sent to the user about this.
+
+The Models List section displays already built and saved models in the Scoring Machine. The results are displayed on 10 models per page, to go to the next / previous / last / first page, you must click on the corresponding symbol at the bottom of the table.
+Illustration
+To search for a specific model, if there are many, you can use the search. To do this, click on the "Search" button in the upper right corner.
+
+To go to the desired model, just click on the line in the table with this model.
+
+When switching to the model, the interface is divided into three sections:
+
+- General information;
+- Scoring model;
+- Tests of the scoring model.
+Illustration
+In the "General Information" section, you can find the name of the model, its description, when the model was created and when the last edit was made. It also displays the status of the model.
+Illustration
+The name of the model and its description are specified by the user at will. These values are needed exclusively by the user in order to navigate what kind of model it is at one stage or another. You can change the model name and / or description with the "Actions". It is recommended to change them immediately after creating the model.
+
+Also below on the page in the table all the attributes from the file are displayed, as well as their informational value. The higher the % in the information value, the more valuable and important the attribute. Accordingly, if the score is very low, then the importance of this attribute is insignificant, it is better not to use such attributes in the final model.
+
+In the section "Scoring model" there will be an already formed model. Namely, all the attributes with the necessary data for each of them. To open an attribute with information on it, you must click on the line with the attribute.
+Illustration
+The most important thing here is the value of the attribute and next to it is the total number of points, if this value is in the attribute when building a forecast. All other attribute parameters are informative primarily for advanced users who are deeply familiar with the construction of scoring for their own analysis, if necessary and desired.
+
+Also, if the user has a desire, he can change the score for a specific attribute value, for this you need to click on the appropriate button next to the score and the changes will be saved in the model.
+This feature is designed to allow small adjustments that the user can know for sure. After your adjustments, you can also retest the scoring model.
+
+More details about the values of all displayed parameters in each attribute are described here.
+
+
+The "Scoring Model Tests" section groups tests by the open scoring model and displays the main information on the test results. Also, after opening the test directly from the model, you can go to the test page with the button.
+Illustration
+With the "Actions" you can activate / deactivate the model to test it, edit the name and description, go to create a new test for the model, export all model data to an excel file, delete the model.
+
+________________________________________________________________________________________________________________________________________________________________________
+
+
+5. Scoring Machine system. Testing the scoring model
+
+The "Testing the scoring model" block contains sections:
+- Creation of a new scoring model test;
+- List of tests of scoring models;
+- Settings for testing scoring models.
+Illustration
+In the "Settings for testing scoring models" section, you can configure the parameters for building a scoring model test.
+Illustration
+Here you can change the number of lines into which the result of testing the scoring model will be divided. The results will be grouped by the specified number of rows. But we recommend not to increase the number of lines too much in order to better see the big picture. We recommend using 10 to 25 lines maximum. And also here you can also, as in the settings for creating a scoring, change how the system should understand a good result and a bad result in your file in the first column.
+
+In the "Creating a new scoring model test" section, the test is created for the active scoring model. You will see on the screen which scoring model is currently active and for which the test will be performed.
+It is worth noting that, depending on the type of subscription, you will have a limited number of saved tests for one model. And this means that if the user has reached the limit, then before starting to build a new test, the test that was created earlier than the others will be deleted. Therefore, we recommend that you control relevant and outdated tests yourself and delete outdated tests. The limit in this case is for each model separately, which means if the user has a limit of tests for one model - 20, and there are 10 models, then the user can save up to 20 tests for one model, in total 200 saved tests.
+Illustration
+To create a test, you need to select a file with data for analysis with the extension .xls or .xlsx on your computer and upload it to the Scoring Machine system. Then click on "Create a new test". The system will make a series of checks on the file, if any inconsistencies in the requirements for the file are found during the first observation, an error will be displayed. After checking the file for a short time, the Scoring Machine will start analyzing the file and display a notification.
+
+The duration of creating a test depends on the amount of data to be analyzed. The larger the data file, the longer the system will analyze and create the test. This means that if an analysis is being carried out for a specific model and the user already sees exactly which attributes are used in the model in one way or another, then you can safely delete unnecessary columns.
+
+A very important process before creating a test is preparing the file correctly so that the system can analyze it better.
+In addition to the general requirements and recommendations for the file, the user should pay attention that the file for the test should contain the same attributes that are selected in the model and the attributes (columns in the file) should be called, and the attribute values themselves should be the same as they are selected in the model, and hence were called during the construction of the model.
+
+All file requirements can be found here.
+
+After the Scoring Machine finishes creating a test, it will immediately be displayed in the general list of tests, and an email will be sent to the user's email informing them that the test creation process is complete. If the test is not created for some reason (for example, errors in the file, the presence of empty cells where they should not be), then an e-mail will also be sent to the user about this.
+
+The "List of tests of scoring models" section displays already created and saved tests in Scoring Machine. The results are displayed on 10 tests per page, to go to the next / previous / last / first page, you must click on the corresponding symbol at the bottom of the table.
+Illustration
+To find a specific test, if there are many, you can use the search. To do this, click on the "Search" button in the upper right corner.
+
+To go to the needed test, just click on the line in the table with this test.
+
+When switching to the test, the name of the scoring model to which the test was proccessed, the name and description of the test, the final result of the Gini Index will be displayed.
+Illustration
+The name of the test and its description are specified by the user at will. These values are only needed by the user in order to navigate what kind of test it is at one stage or another. You can change the name of the test and / or description through the "Actions". It is recommended to change them immediately after creating the test.
+
+Also below on the page in the table the test results are displayed. The test results are grouped by the number of rows that was specified in the test settings at the time of the test.
+
+More details about the values in the table according to the test results:
+
+1. Count of scores – this column displays information on those records in the file that scored the specified number of points.
+2. Total items – the total number of records in the file with the specified number of points scored.
+3. Count of Good – the number of entries marked as "good" in the file with the specified number of points scored.
+4. Count of Bad - the number of records marked as "bad" in the file with the specified number of points scored.
+5. Bad Rate, % - proportion of bad ones in relation to the total number of entries with a specified number of points scored.
+6. Cum. Total count – the total number of cumulative records. Number of entries in current line + all previous lines.
+7. Cum. Total, % - proportion of the total with a cumulative total of the total number of records in the entire file.
+8. Cum. Good count - the number of good entries as a cumulative total. Number of good entries in the current line + all previous lines.
+9. Cum. Good, % - proportion of the number of good records with a cumulative total of the total number of good records in the entire file.
+10. Cum. Bad count - the number of bad records as a cumulative total. Number of bad entries in current line + all previous lines.
+11. Cum. Bad, % - proportion of the number of bad records with a cumulative total of the total number of bad records in the entire file.
+12. Gini Index – the main indicator of the predictive power of the model. It is important to pay attention to the total Gini at the very bottom of the table. The higher the result, the better and higher the predictive power of the model.
+A sufficiently high-quality model can be called if testing shows a Gini result of 30% or more. If the result is lower, then the model, as a rule, does not make sense to use.
+But what predictive power should be still much depends on the field of activity and the ability to select attributes for analysis.
+If the model is with a Gini result above 50% or 60%, then this is already a fairly strong predictive model for almost any field of activity.
+
+With "Actions" you can edit the name and description, export all test data to an excel file, delete the test.
+
+Based on the results of testing, it is necessary to analyze it and determine whether the model is good enough or whether it still needs to be refined and rebuilt, and also to determine what decisions can be made based on this model.
+
+______________________________________________________________________________________________________________________________________________________
+
+6. Advanced settings for building models
+
+In the "Model Creation" block, in addition to general settings for creating a scoring model, advanced settings are also available. To go to them, go to the "Advanced settings for creating a model" section.
+
+The settings are intended to correct the algorithm for selecting important attributes for creating a model, as well as calculating the scoring score for each attribute value.
+Illustration
+In this section, you can change the following settings:
+
+1. Marked as a good result – how exactly in the file that will be uploaded for creating the scoring model and testing, “Good” results will be marked in the first column of the file.
+
+2. Marked as a bad result – how exactly in the file that will be uploaded for creating the scoring model and testing, “Bad” results will be marked in the first column of the file.
+
+3. Factor – coefficient for the formation of the scoring score. The lower the value, the lower the final scoring score will be, but the difference between good and bad will also be smaller. Cannot be less than 1.
+
+4. Offset – coefficient for the formation of the scoring score. The lower the value, the lower the final score will be. Cannot be less than 0.
+
+5. Minimum needed total "Information Value" for Attribute – a metric that affects the selection of attributes without a conncat. The total information value is checked and, if it is less than the value specified here, the attribute is not taken into account for building the model.
+
+6. Minimum needed average "Information Value" for Attribute – a metric that affects the selection of attributes without a conncat. The average information value among all attribute values is checked and if the average information value in the attribute is less than specified here, the attribute is not taken into account for building the model.
+
+7. Max variants of value for Concated Attribute – after combining the attributes with each other for cross analysis, we will check the number of value options that turned out in the combined attribute, if there are more of them than specified here, then the attribute will not be taken to build the model. We do not recommend setting a value greater than 20 or 30 here, this is usually the maximum value so that the attribute does not distort the model.
+
+8. Minimum needed total "Information Value" for Concated Attribute – a measure that influences the selection of combined attributes. The total information value is checked and, if it is less than the value specified here, the attribute is not taken into account for building the model.
+
+9. Minimum needed average "Information Value" for Concated Attribute – a measure that influences the selection of combined attributes. The average information value among all attribute values is checked and if the average information value in the attribute is less than specified here, the attribute is not taken into account for building the model.
+
+___________________________________________________________________________________________________________________________________________________________
+
+7. Preparation of initial data for analysis. Requirements for an excel file for building a model / running a test
+
+Preparation of initial data for analysis. Requirements for an excel file for building a model / running a test
+The Scoring Machine system creates scoring models and tests for them by uploading excel files with the .xls / .xlsx extension, but it is very important that the files used meet the requirements for correct analysis and, it is desirable that the user also follow the recommendations during the formation file and data preparation so that the model is as efficient as possible.
+Preparation and collection of data for creating a scoring model and testing. General information
+The construction of scoring maps is based on statistical models. To build them, there must be sufficient and high-quality information about customers. The quality of the initial statistical data for building a statistical model determines its forecasting accuracy and the success of developing a scoring model as a whole.
+
+The development of a scoring model is based on the analysis of previous experience. A sufficient amount of information is one of the main prerequisites for building a model. The amount of data may vary depending on specific models, but in general the data should satisfy the requirements of statistical significance and randomness. The initial data for building the model may contain internal questionnaire data, as well as external data received from partners or even computational data that the user / user system calculates on its side (for example, the difference and periods between calls to the company). Everything you know or can learn about the client at the time of their contact.
+
+Ideally, scoring models should be applied to the same products, market sector, and economic situation that formed the basis of the past experience data. For example, information on consumer loans cannot be adequately used in the development of a scorecard for car loans. This requirement specifies the period for which data is collected. The historical period of data for building a model is usually determined by the type of scoring and the type of product, the type of client. This means that if your customers are segmented, it is important to create separate scorecards not only for different products (loan, credit card, car loan, early debt collection, late debt collection, email advertising, sms advertising, telemarketing use), but and for different customer segments. The simplest client segmentation: a new client and a repeat client who has already used the company's services before. For them, completely different attributes may be important.
+
+Therefore, the use of several scoring cards and models often gives a much better result.
+
+It is best to take data as fresh as possible, but where the target event has already been committed. For example, you have issued a loan and your goal is that the client does not go into delay for more than 1 month. Then it is best to take data for the longest possible period, but only for the period where all customers, in theory, could already either close the loan or go into arrears. It is desirable to avoid ambiguities as much as possible. Or you do SMS-mailing to clients, where the target task is to get the necessary activity from them during the week. Then you can use these clients for analysis at least after a week, not earlier.
+Data about a certain type of customer must be excluded from the source infobase. These may be atypical clients - scammers, employees, VIP clients, deceased clients, i.e. all those customers who are knocked out of the mass with something bright. For each such type, if necessary, it is better to build a separate scoring model.
+Definition of dependent variable
+The choice of the dependent variable is determined by the purpose of constructing the scoring model. For example, exit or not exit on delay, response to activity from a certain channel, purchase of additional goods.
+At the stage of determining the dependent variable, customers are divided into three groups: "bad", "good" and "uncertain". Bad - those where the desired goal was not achieved. The good ones are those where the goal was achieved. Uncertain - those where the goal could not yet be achieved or there is little data on the data of clients, for example, an incomplete questionnaire with a lack of many attributes or the inability to calculate most of the data, etc.
+
+When building a scorecard, only clients defined as "bad" and "good" are used. Undefined clients are excluded from the source data to create the model.
+Formation of training and test lists
+The information data available for building a scoring model is often called a historical sample. The historical sample should reflect the target population of customers as accurately as possible, i.e. be representative. So after preparing this customer data, breaking it down into different segments by customer type, region, or product, you can move on to the next step.
+
+To check the adequacy and accuracy of the scoring model prediction at the stage of its development, the historical sample must be divided into two groups:
+
+- training list - observations, according to which the model will be directly built;
+- test or control list - observations from which the value of the dependent variable will be known, but they will not participate in the construction of the model, but will be used to test the accuracy of the model prediction.
+The training and control samples should be formed on the basis of a random selection mechanism, usually in the ratio of 70–80% and 30–20%, respectively, of the initial volume of the historical sample.
+
+Checking the reliability of the model consists in its application and comparison of the results on the control and test samples. The model should give correct predictions not only on the training set, but also in practice when it is applied. Typically, a two-sample model generalization strategy is used. Similar accuracy scores obtained on the training and test sets are a sign that in practice the scoring model will work in much the same way.
+
+If the quality of the model is insufficient, then you can change the attributes, attribute weights, or coefficient weights for the final score to change the model and rerun the test.
+Determination of the list size
+It is possible to build a model on repeating dependencies. Accordingly, the larger the sample, the better. In practice, a sample size of at least 5,000–10,000 clients is recommended for model building. But there is a practice of building a model for 1,000 clients. In any case, try to use the maximum number of clients, but on the condition of dividing into the necessary segments and excluding those clients for which the data is not complete, as described above.
+A 50/50 ratio of good to bad is best, but this is usually not possible. In any case, we do not recommend specifically making such a ratio for the sample. It is better to take everyone for a certain period, even if the ratio of bad ones to good ones is an order of magnitude smaller.
+After preparing this data, you can find the necessary dependencies and build a scoring model, thereby significantly improving the achievement of desired results with lower costs.
+File Requirements
+To upload data and build a model and test, you have prepared all the data, and they are ready for analysis. Now you need to prepare the file for certain requirements so that the model can be built.
+
+1. The file type must be .xls or .xlsx saved as an Excel workbook and nothing else.
+
+2. The first column in the file should be filled in with a good or bad client. For example, GOOD or BAD or other values that are specified in the settings.
+
+3. Use only the data that is known before the decision for which you are building a scoring model.
+
+4. For data analysis, each product is 1 line. And this means that you do not need to combine the client into one line if the client contacted several times for products. In such cases, there should be exactly as many lines as there are products and the data in the file should be up-to-date exactly at the time the client asked product.
+
+5. Some personal data are not needed for analysis, they will not be used to build the model anyway, so it is better not to include them in the file. For example, name, phone number and other similar personal data.
+
+6. You can not leave empty cells, missing data! If there is an empty cell, write down some other value there, some kind of your own constant, for example "null" or "unknown". It is important! There should not be gaps in the uploaded file, all cells, if there is data in the line, must be filled with something.
+
+7. No more than 20–30 value options are recommended, and it is best to have up to 10 attribute value options. This means that if any of the attributes consists of many options, then it is better to fill this data with groups of values. For example, the age of the client. This attribute is best served in groups of several years, for example: 18–21; 22–25; 26–30… But this does not mean that if required, you can not use a lot of values, just, as a rule, this will distort the model and will not give the best result.
+
+8. To upload the test model, be sure to note that the attributes and their values in the test model must have exactly the same names as in the scoring model itself. If the scoring model has combined some attributes, then you do not need to do it yourself, Scoring Machine will combine the same attributes during testing, if necessary.
+
+Uploading data example:
+Illustration
+When the data is ready, if you do not plan to use the same file for building the model and for the test, then we immediately recommend divide it by 80 / 20 or 90 / 10, where the first part is the percentage for the training sample with which you will build a model, and the second part is a test sample, on which you will check the finished model.
+
+As soon as the data is ready, you can safely start building a scoring model using the Scoring Machine, you will be surprised how easy it is!
+
+__________________________________________________________________________________________________________________________________________________________
+
+8. Model attributes and parameters and their values
+
+When switching to the scoring model, the scoring model itself is displayed in the "Scoring model" section. Namely, all the attributes with the necessary data for each of them. To open an attribute with information on it, you must click on the line with the attribute.
+Illustration
+Illustration
+See below for more details on each value in the attribute tables:
+
+1. Attribute value – the value of the attribute that was opened, in which the table itself is located.
+
+2. Count of Scores – the number of score that the client needs to add according to the model, if this value is present in the attribute during analysis.
+
+The model itself is these 2 values. Attribute value and score. The rest of the data is displayed for general informativeness on the analysis of the file from which the scoring model was created.
+
+3. Count of Good – the number of good clients in the file to create a model with this attribute value.
+
+4. Count of Bad – the number of bad clients in the file to create a model with this attribute value.
+
+5. Rate of Good, % - proportion of good clients in the file for creating a model with this attribute value from the total number of rows with this attribute value.
+
+6. Rate of Bad, % - proportion of bad clients in the file for creating a model with this attribute value from the total number of lines with this attribute value.
+
+7. Count of Total – total number of clients in the file to create a model with this attribute value.
+
+8. Population Rate of Good, % - proportion of good clients with this attribute value from the total number of good ones in %.
+
+9. Population Rate of Bad, % - proportion of bad clients with this attribute value from the total number of bad clients in %.
+
+10. Population Rate of Total, % - proportion of the total number of clients with this attribute value from the total number in the file in %.
+
+11. Rate of Good from total good in Attribute – proportion of good clients with this attribute value from the total number of good ones.
+
+12. Rate of Bad from total bad in Attribute – proportion of bad clients with this attribute value out of the total number of bad clients.
+
+13. Measure of Probability of good – the degree of probability that a client with this attribute value will be good.
+
+14. Weight of Evidence – how significant is the value of the attribute in the general model among all clients in the file.
+
+15. Information Value – what informational value this attribute and its individual values carry.
+
+To understand whether it is worth selecting an attribute and its values into the model, it is necessary to focus on the informational value. If the informational value of an attribute ends up being above 3%, that's already very good. But, if it so happened that for some attribute the information value became close to 100% or even more, then you should know that this is almost impossible, and it is necessary to double-check the sample. An informational value close to 100% should always be suspicious, it might even be better to exclude the attribute completely.
+
+________________________________________________________________________________________________________________________________________________________________________
+
+9. Test of the scoring model. Analysis of the final test and its values
+
+Test of the scoring model. Analysis of the final test and its values
+After completing the creation of a test of scoring model, it is necessary to analyze it and determine whether the model is good enough or whether it still needs to be refined and rebuilt, and also to determine what decisions can be made based on this model.
+
+Learn more about the testing process here.
+Illustration
+First of all, you need to pay attention to the final Gini Index. It shows the predictive and gradual strength of the model. Namely, how strong is the dependence of the model in relation to the fact that the more points the client gains, the higher the probability that he will be good.
+
+If the Gini index is lower than 30%, then such a model is considered to be of poor quality at all. And it makes sense to try to rebuild it again.
+
+If the Gini index is above 30%–40%, then such a model is already considered worthy and can be used.
+
+If your Gini index is more than 60%, then you can safely be sure that the model is very, very strong.
+
+The next step is to determine the threshold for accumulating points, up to which the system will refuse in one or another process for the client.
+It depends more on what goals were pursued to create a scoring model, as a rule, it is necessary to determine the threshold of bad clients, which the user is ready to skip based on his requirements, and then take the minimum number of scores from this line as the minimum threshold for passing the scoring model.
+
+With the columns with the "Accumulated ..." prefix, you can see how many and which clients will be rejected in total in quantitative or better in percentage terms at the selected minimum threshold.
+
+Model analysis is easier making for most users in excel. To do this, you can export both the scoring model and the test to an excel file.
+More details about the data exported to excel can be found here.
+
+As soon as a scoring model is created that has come up in terms of its predictive strength, the minimum threshold for passing is selected, you can implement the scoring model in your system.
+
+Calibration of any scoring model is still needed periodically. Usually every 3 months, because products, marketing strategies, customer segments, macroeconomic features and more can change. Many factors can change the behavior of the client and that is why do not forget to check the scoring model for relevance through the same testing and calibrate or completely change it and create a new model.
+
+Scoring Machine will help you with this.
+
+If you have any questions about using the system, feel free to contact support.
+
+_________________________________________________________________________________________________________________________________________________________________
+
+10. Exporting finished data to Excel
+
+After completing the creation of the scoring model, as well as testing the model for analysis, most users may need to export the data to excel for more convenient work with the data, and Scoring Machine provides this opportunity.
+Exporting the scoring model to excel
+To export the scoring model to excel, go to "Actions" and click "Export this model to Excel".
+Illustration
+In the downloaded excel file, you can see 2 sheets:
+- Common Information
+- Scoring Model
+
+In the “Common Information” sheet, you can see all the same information as in the system interface, all attributes with their general information value - importance for the scoring model.
+Illustration
+In the "Scoring Model" sheet, you can see all the attributes that make up the model, the values of these attributes and all related data, as they are displayed in the Scoring Machine interface. For each attribute, its own table is created with all the data on the attribute values.
+Illustration
+Exporting a test of scoring model to excel
+To export a scoring model test to excel, on the test page, go to "Actions" and click "Export this test to Excel".
+Illustration
+The file contains the same table with the same data as in the Scoring Machine interface.
